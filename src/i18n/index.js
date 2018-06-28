@@ -68,7 +68,7 @@ const i18n = new VueI18n({
     'zh-cn': zhCN,
     'zh-tw': zhTW,
     'es': es,
-    'de': de
+    'de': de,
     'ru': ru
   }
 })
