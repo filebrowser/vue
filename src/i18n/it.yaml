@@ -189,16 +189,17 @@ search:
   video: Video
   writeToSearch: Scrivi qui per cercare
 languages:
-  en: Inglese
-  fr: Francese
-  pt: Portoghese
-  ptBR: Portoghese (Brasiliano)
-  ja: Giapponese
-  zhCN: Cinese (semplificato)
-  zhTW: Cinese (tradizionale)
-  es: Spagnolo
-  de: Tedesco
-  ru: Russo
+  en: English
+  it: Italian
+  fr: Français
+  pt: Português
+  ptBR: Português (Brasil)
+  ja: 日本語
+  zhCN: 中文 (简体)
+  zhTW: 中文 (繁體)
+  es: Español
+  de: Deutsch
+  ru: Русский
 time:
   unit: Unità di tempo
   seconds: Secondi
