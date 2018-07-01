@@ -188,6 +188,7 @@ search:
   writeToSearch: Введи текст для поиска
 languages:
   en: English
+  it: Italian
   fr: Français
   pt: Português
   ja: 日本語
