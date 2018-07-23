@@ -48,10 +48,10 @@
 
     <h2 v-if="req.numDirs > 0">{{ $t('files.folders') }}</h2>
     <div v-if="req.numDirs > 0">
-      <item v-for="(item, index) in dirs"
+      <item v-for="(item) in dirs"
         v-if="item.isDir"
         :key="base64(item.name)"
-        v-bind:index="index"
+        v-bind:index="item.index"
         v-bind:name="item.name"
         v-bind:isDir="item.isDir"
         v-bind:url="item.url"
@@ -63,10 +63,10 @@
 
     <h2 v-if="req.numFiles > 0">{{ $t('files.files') }}</h2>
     <div v-if="req.numFiles > 0">
-      <item v-for="(item, index) in files"
+      <item v-for="(item) in files"
         v-if="!item.isDir"
         :key="base64(item.name)"
-        v-bind:index="index"
+        v-bind:index="item.index"
         v-bind:name="item.name"
         v-bind:isDir="item.isDir"
         v-bind:url="item.url"
@@ -120,7 +120,9 @@ export default {
       const dirs = []
       const files = []
 
-      this.req.items.forEach(item => {
+      this.req.items.forEach((item, index) => {
+        item.index = index
+
         if (item.isDir) {
           dirs.push(item)
         } else {
