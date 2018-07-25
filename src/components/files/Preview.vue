@@ -23,7 +23,7 @@
       <audio v-else-if="req.type == 'audio'" :src="raw()" autoplay controls></audio>
       <video v-else-if="req.type == 'video'" :src="raw()" autoplay controls>
         <track v-for="(sub, index) in subtitles" :kind="sub.kind" :src="'/api/subtitle/' + sub.src" :label="sub.label" :default="index === 0">
-	Sorry, your browser doesn't support embedded videos,
+        Sorry, your browser doesn't support embedded videos,
         but don't worry, you can <a :href="download()">download it</a>
         and watch it with your favorite video player!
       </video>
