@@ -84,7 +84,7 @@ const i18n = new VueI18n({
     'de': de,
     'ru': ru,
     'pl': pl,
-    'ko': ko 
+    'ko': ko
   }
 })
 
