@@ -75,8 +75,8 @@ prompts:
   copy: 복사
   copyMessage: '파일을 복사할 곳 정하기:'
   currentlyNavigating: '현재 위치:'
-  deleteMessageMultiple: {count}개의 파일을 삭제하시겠습니까??
-  deleteMessageSingle: 이 파일이나 폴더를 삭제하시겠습니까??
+  deleteMessageMultiple: "{count} 개의 파일을 삭제하시겠습니까?"
+  deleteMessageSingle: 이 파일 혹은 디렉토리를 삭제하시겠습니까?
   deleteTitle: 파일 삭제
   displayName: '디스플레이 네임:'
   download: 파일 다운로드
