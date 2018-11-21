@@ -144,6 +144,7 @@ export default {
 
       api.fetch(url)
         .then((req) => {
+          if (window.location.pathname !== req.url) return
           if (!url.endsWith('/') && req.url.endsWith('/')) {
             window.history.replaceState(window.history.state, document.title, window.location.pathname + '/')
           }
