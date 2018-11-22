@@ -16,6 +16,7 @@ buttons:
   next: 下一个
   ok: 确定
   replace: 替换
+  repeat: 重复模式
   previous: 上一个
   rename: 重命名
   reportIssue: 报告问题
