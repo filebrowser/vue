@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'repeat-button',
@@ -28,7 +28,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['updateUser']),
     change: function (event) {
       let repeatIcon = document.querySelector(`#repeat-button > i`)
 
