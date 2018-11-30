@@ -1,20 +1,35 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "filebrowser-frontend",
+  "version": "2.0.0",
+  "author": "File Browser contributors",
+  "contributors": [
+    "Henrique Dias <hacdias@gmail.com>"
+  ],
   "private": true,
-  "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
-  },
   "scripts": {
+    "lint": "standard",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "dependencies": {
+    "i18next": "^12.1.0",
+    "i18next-icu": "^0.6.0",
+    "i18next-xhr-backend": "^1.5.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-i18next": "^8.3.8",
+    "react-scripts": "2.1.1",
+    "redux-bundler": "^22.2.0",
+    "redux-bundler-react": "^1.1.0",
+    "standard": "^12.0.1"
+  },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   },
   "browserslist": [
     ">0.2%",
