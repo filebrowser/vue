@@ -1,5 +1,6 @@
-@import "~codemirror/lib/codemirror.css";
-@import "~codemirror/theme/ttcn.css";
+/* @import "~codemirror/lib/codemirror.css";
+@import "~codemirror/theme/ttcn.css"; */
+
 #editor {
   max-width: 800px;
   margin: 0 auto;

@@ -10,7 +10,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import CodeMirror from '@/utils/codemirror'
+// import CodeMirror from '@/utils/codemirror'
 import * as api from '@/utils/api'
 import buttons from '@/utils/buttons'
 
@@ -53,7 +53,7 @@ export default {
     }
 
     // Set up the main content editor.
-    this.content = CodeMirror(document.getElementById('editor'), {
+    /* this.content = CodeMirror(document.getElementById('editor'), {
       value: this.req.content,
       lineNumbers: (this.req.language !== 'markdown'),
       viewportMargin: 500,
@@ -61,9 +61,9 @@ export default {
       mode: this.req.language,
       theme: (this.req.language === 'markdown') ? 'markdown' : 'ttcn',
       lineWrapping: (this.req.language === 'markdown')
-    })
+    }) *()
 
-    CodeMirror.autoLoadMode(this.content, this.req.language)
+    // CodeMirror.autoLoadMode(this.content, this.req.language)
 
     // Prevent of going on if there is no metadata.
     if (!this.hasMetadata) {
@@ -73,7 +73,7 @@ export default {
     this.parseMetadata()
 
     // Set up metadata editor.
-    this.metadata = CodeMirror(document.getElementById('metadata'), {
+    /* this.metadata = CodeMirror(document.getElementById('metadata'), {
       value: this.req.metadata,
       viewportMargin: Infinity,
       lineWrapping: true,
@@ -81,7 +81,7 @@ export default {
       mode: this.metalang
     })
 
-    CodeMirror.autoLoadMode(this.metadata, this.metalang)
+    // CodeMirror.autoLoadMode(this.metadata, this.metalang) */
   },
   methods: {
     // Saves the content when the user presses CTRL-S.

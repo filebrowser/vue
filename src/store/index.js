@@ -17,11 +17,11 @@ const state = {
     window.CSS = null
     return css
   })(),
-  recaptcha: document.querySelector('meta[name="recaptcha"]').getAttribute('content'),
-  staticGen: document.querySelector('meta[name="staticgen"]').getAttribute('content'),
+  recaptcha: '',
+  // TODO:
   baseURL: document.querySelector('meta[name="base"]').getAttribute('content'),
-  noAuth: (document.querySelector('meta[name="noauth"]').getAttribute('content') === 'true'),
-  version: document.querySelector('meta[name="version"]').getAttribute('content'),
+  noAuth: false,
+  version: '2',
   jwt: '',
   progress: 0,
   schedule: '',

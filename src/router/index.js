@@ -145,7 +145,7 @@ router.beforeEach((to, from, next) => {
 
         next()
       })
-      .catch(e => {
+      .catch(_ => {
         next({
           path: '/login',
           query: { redirect: to.fullPath }

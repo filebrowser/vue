@@ -6,41 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <!-- Inject some variables -->
-  <meta name="base" content="{{ .baseurl }}">
-  <meta name="staticgen" content="{{ .StaticGen }}">
-  <meta name="noauth" content="{{ .NoAuth }}">
-  <meta name="version" content="{{ .Version }}">
-  <meta name="recaptcha" content="{{ .ReCaptchaKey }}">
+  <meta name="base" content="{{ .BaseURL }}">
 
   <title>File Browser</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ .baseurl }}/static/img/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ .baseurl }}/static/img/icons/favicon-16x16.png">
-  <!--[if IE]><link rel="shortcut icon" href="{{ .baseurl }}/static/img/icons/favicon.ico"><![endif]-->
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/{{ .StaticURL }}/img/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/{{ .StaticURL }}/img/icons/favicon-16x16.png">
   <!-- Add to home screen for Android and modern mobile browsers -->
-  <link rel="manifest" href="{{ .baseurl }}/static/manifest.json">
+  <link rel="manifest" href="/{{ .StaticURL }}/manifest.json">
   <meta name="theme-color" content="#2979ff">
 
   <!-- Add to home screen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="assets">
-  <link rel="apple-touch-icon" href="{{ .baseurl }}/static/img/icons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" href="/{{ .StaticURL }}/img/icons/apple-touch-icon-152x152.png">
 
   <!-- Add to home screen for Windows -->
-  <meta name="msapplication-TileImage" content="{{ .baseurl }}/static/img/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="/{{ .StaticURL }}/img/icons/msapplication-icon-144x144.png">
   <meta name="msapplication-TileColor" content="#2979ff">
-
-  <script>CSS = "{{ .CSS }}"</script>
-
-  {{ if .ReCaptcha -}}
-    <script src="{{ .ReCaptchaHost }}/recaptcha/api.js?render=explicit"></script>
-  {{ end }}
-
-  <% for (var chunk of webpack.chunks) {
-    for (var file of chunk.files) {
-      if (file.match(/\.(js|css)$/)) { %>
-      <link rel="preload" href="{{ .baseurl }}/<%= file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 
   <style>
   #loading {
@@ -115,7 +99,5 @@
       <div class="bounce3"></div>
     </div>
   </div>
-
-  <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
 </body>
 </html>
