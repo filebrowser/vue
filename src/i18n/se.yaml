@@ -1,0 +1,206 @@
+permanent: Permanent
+buttons:
+  cancel: Avbryt 
+  close: Stäng
+  copy: Kopiera
+  copyFile: Kopiera fil
+  copyToClipboard: kopiera til urklippshanteraren
+  create: Skapa
+  delete: Radera
+  download: Hämta
+  info: Info
+  more: Mer
+  move: Flytta
+  moveFile: Flytta fil
+  new: Ny
+  next: Nästa
+  ok: OK
+  replace: Byt ut
+  previous: Föregående
+  rename: Byt namn
+  reportIssue: Rapportera fel
+  save: Spara
+  search: Sök
+  select: Välj
+  share: Dela
+  publish: Publicera
+  selectMultiple: Välj flera
+  schedule: Schema
+  switchView: Byt vy
+  toggleSidebar: Växla sidofält
+  update: Uppdatera
+  upload: Ladda upp
+  permalink: Hämta permalänk
+success:
+  linkCopied: Länk kopierad!
+errors:
+  forbidden: Du är inte välkommen här.
+  internal: Någonting gick verkligen fel.
+  notFound: Denna plats kan inte nås.
+files:
+  folders: Kataloger
+  files: Filer
+  body: Body
+  clear: Rensa
+  closePreview: Stäng förhandsvisning
+  home: Hem
+  lastModified: Senast ändrad
+  loading: Laddar...
+  lonely: Det ekar härinne...
+  metadata: Metadata
+  multipleSelectionEnabled: Flervalsalternativ aktiverat
+  name: Namn
+  size: Storlek
+  sortByName: Sortera på namn
+  sortBySize: Sortera på storlek
+  sortByLastModified: Sortera på senast ändrad
+help:
+  click: Välj fil eller katalog
+  ctrl:
+    click: Välj flera filer eller kataloger
+    f: öppnar sök
+    s: spara en fil eller hämta katalogen där du står
+  del: radera valt alternativ
+  doubleClick: öppna en fil eller katalog
+  esc: rensa val och eller stäng prompten
+  f1: denna information
+  f2: byt namn på filen
+  help: Hjälp
+login:
+  password: Lösenord
+  submit: Inloggning
+  username: Användarnamn
+  wrongCredentials: Fel användaruppgifter
+prompts:
+  copy: Kopiera
+  copyMessage: 'Välj var du vill kopiera filen:'
+  currentlyNavigating: 'Navigera nu på:'
+  deleteMessageMultiple: Är du säker på att du vill radera {count} file(r)?
+  deleteMessageSingle: Är du säker på att du vill radera denna fil/katalog?
+  deleteTitle: Radera filer
+  displayName: 'Visa namn:'
+  download: Hämta filer
+  downloadMessage: Välj vilket format du vill hämta.
+  error: Något gick fel
+  fileInfo: Filinformation
+  filesSelected: "{count} filer valda."
+  lastModified: Senast ändrade
+  move: Flytta
+  moveMessage: 'Välj ny plats för dina fil(er)/katalog(er):'
+  newDir: Ny katalog
+  newDirMessage: ANge namn för den nya katalogen.
+  newFile: Ny fil
+  newFileMessage: Ange namn på den nya filen.
+  numberDirs: Antal kataloger
+  numberFiles: Antal filer
+  replace: Byt ut
+  replaceMessage: >
+    En av filerna som du försöker ladda upp skapar en konflikt pga sitt namn.
+    Vill du byta ut den befintliga?
+  rename: Döp om
+  renameMessage: Ange ett nytt namn för
+  show: Visa
+  size: Storlek
+  schedule: Schema
+  scheduleMessage: Välj datum och tid för att schemalägga publiceringen av detta inlägg.
+  Skapa ett nytt inlägg baserat på en arketyp. Din fil kommer att skapas i innehållsmappen
+settings:
+  admin: Admin
+  administrator: Administratör
+  allowCommands: Utför kommando
+  allowEdit: Ändra, döp om och radera filer eller kataloger
+  allowNew: Skapa nya filer och kataloger
+  allowPublish: Publicera inlägg och sidor
+  avoidChanges: "(lämna blankt för att undvika ändringar)"
+  changePassword: Byt lösenord
+  commands: Kommandon
+  commandsHelp: >
+    Här kan du ange kommandon som utförs i namngivna händelser. Du kan ange ett kommando per rad. Om händelsen är relaterad till
+    filer, som t ex före och efter sparande, kommer miljövariabeln "FIL" var tillgänglig i sökvägen för filen.
+  commandsUpdated: Kommandon uppdaterade!
+  customStylesheet: Anpassade stilmallar
+  examples: Exempel
+  globalSettings: Globala inställningar
+  language: Språk
+  lockPassword: Förhindra användare att ändra lösenord
+  newPassword: Ditt nya lösenord
+  newPasswordConfirm: Ange ditt nya lösenord igen
+  newUser: Ny användare
+  password: Lösenord
+  passwordUpdated: Lösenord uppdaterat!
+  permissions: Behörigheter
+  permissionsHelp: >
+    Du kan ange användare som en administratör eller välja behörigheter individuellt.
+    Om du väljer "Administratör", blir alla andra alternativ automatiskt valda. Hanteringen av användare förblir en 
+    administratörsrättighet.
+  profileSettings: Profilinställningar
+  ruleExample1: >
+    blockerar åtkomst till vilken dotfil som helst (som .git, .gitignore) i varje katalog.
+  ruleExample2: blockerar åtkomst till filen med namn Caddyfil i rten till omfattningen.
+  rules: Rules
+  rulesHelp1: >
+    Här kan du definiera regler för vad som tillåts eller inte tillåts för denna specifika användare. Blockerade filer 
+    visas inte och de är inte åtkomstbara för användaren. Vi stödjer regex och sökvägare relativa till användarens innehåll.
+  rulesHelp2: >
+    Varje regel skrivs på en separat rad och måste börja med nyckelordet {0} eller {1}. 
+    Sedan bör du skriva {2} om du använder ett reguljärt uttryck och sedan uttrycket eller sökvägen.
+  scope: Innehåll
+  settingsUpdated: Inställningar uppdaterade!
+  user: Användare
+  userCommands: Kommandon
+  userCommandsHelp: >
+    En blankstegsseparerad lista med tillgängliga kommandon för denna användare.
+    Example:
+  userCreated: Användare skapad!
+  userDeleted: Användare raderad!
+  userManagement: Användarhantering
+  username: Användarnamn
+  users: Användare
+  userUpdated: Användare uppdaterad!
+sidebar:
+  help: Hjälp
+  logout: Logga ut
+  myFiles: Mina filer
+  newFile: Ny fil
+  newFolder: Ny katalog
+  settings: Inställningar
+  siteSettings: Inställningar för sidan
+  hugoNew: Hugo ny
+  preview: Förhandsvisning
+search:
+  images: Bilder
+  music: Musik
+  notSupportedCommand: Detta är inte ett kommando som stödjs.
+  pdf: PDF
+  pressToExecute: Tryck enter för att utföra.
+  pressToSearch: Tryck enter för att söka.
+  search: Sök...
+  searchOrCommand: Sök eller utför ett kommando...
+  searchOrSupportedCommand: 'Sök eller ange ''$'' och använd ett kommando som stöds:'
+  typeCommand: Skriv och tryck enter för att utföra.
+  typeSearch: Skriv tryck enter för att söka.
+  types: Typer
+  video: Video
+  writeToSearch: Skriv här för att söka
+languages:
+  ar: العربية
+  en: English
+  it: Italiano
+  fr: Français
+  pt: Português
+  ptBR: Português (Brasil)
+  ja: 日本語
+  zhCN: 中文 (简体)
+  zhTW: 中文 (繁體)
+  es: Español
+  de: Deutsch
+  ru: Русский
+  pl: Polski
+  ko: 한국어
+  se: Svenska
+time:
+  unit: Tidsenheter
+  seconds: Sekunder
+  minutes: Minuter
+  hours: Timmar
+  days: Dagar
