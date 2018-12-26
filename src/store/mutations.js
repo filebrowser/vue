@@ -40,6 +40,7 @@ const mutations = {
   setCSS: (state, value) => (state.css = value),
   setJWT: (state, value) => (state.jwt = value),
   multiple: (state, value) => (state.multiple = value),
+  repeat: (state, value) => (state.repeat = value),
   addSelected: (state, value) => (state.selected.push(value)),
   addPlugin: (state, value) => {
     state.plugins.push(value)

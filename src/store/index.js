@@ -29,6 +29,7 @@ const state = {
   reload: false,
   selected: [],
   multiple: false,
+  repeat: '',
   show: null,
   showMessage: null,
   showConfirm: null

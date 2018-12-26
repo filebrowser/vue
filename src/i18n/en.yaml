@@ -16,6 +16,7 @@ buttons:
   next: Next
   ok: OK
   replace: Replace
+  repeat: Repeat mode
   previous: Previous
   rename: Rename
   reportIssue: Report Issue

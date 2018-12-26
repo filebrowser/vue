@@ -4,24 +4,24 @@
       <button @click="back" class="action" :title="$t('files.closePreview')" :aria-label="$t('files.closePreview')" id="close">
         <i class="material-icons">close</i>
       </button>
-
+      <repeat-button v-if="req.type == 'audio' || req.type == 'video'"></repeat-button>
       <rename-button v-if="allowEdit()"></rename-button>
       <delete-button v-if="allowEdit()"></delete-button>
       <download-button></download-button>
       <info-button></info-button>
     </div>
 
-    <button class="action" @click="prev" v-show="hasPrevious" :aria-label="$t('buttons.previous')" :title="$t('buttons.previous')">
+    <button class="action" id="button-previous" @click="prev" v-show="hasPrevious" :aria-label="$t('buttons.previous')" :title="$t('buttons.previous')">
       <i class="material-icons">chevron_left</i>
     </button>
-    <button class="action" @click="next" v-show="hasNext" :aria-label="$t('buttons.next')" :title="$t('buttons.next')">
+    <button class="action" id="button-next" @click="next" v-show="hasNext" :aria-label="$t('buttons.next')" :title="$t('buttons.next')">
       <i class="material-icons">chevron_right</i>
     </button>
 
     <div class="preview">
       <img v-if="req.type == 'image'" :src="raw()">
-      <audio v-else-if="req.type == 'audio'" :src="raw()" autoplay controls></audio>
-      <video v-else-if="req.type == 'video'" :src="raw()" autoplay controls>
+      <audio id="preview-audio" v-else-if="req.type == 'audio'" :src="raw()" @ended="playNext" autoplay controls></audio>
+      <video id="preview-video" v-else-if="req.type == 'video'" :src="raw()" @ended="playNext" autoplay controls>
         <track v-for="(sub, index) in subtitles" :kind="sub.kind" :src="'/api/subtitle/' + sub.src" :label="sub.label" :default="index === 0">
         Sorry, your browser doesn't support embedded videos,
         but don't worry, you can <a :href="download()">download it</a>
@@ -44,6 +44,7 @@ import InfoButton from '@/components/buttons/Info'
 import DeleteButton from '@/components/buttons/Delete'
 import RenameButton from '@/components/buttons/Rename'
 import DownloadButton from '@/components/buttons/Download'
+import RepeatButton from '@/components/buttons/Repeat'
 
 export default {
   name: 'preview',
@@ -51,12 +52,14 @@ export default {
     InfoButton,
     DeleteButton,
     RenameButton,
-    DownloadButton
+    DownloadButton,
+    RepeatButton
   },
   data: function () {
     return {
       previousLink: '',
       nextLink: '',
+      nextMedia: '',
       listing: null,
       subtitles: []
     }
@@ -68,6 +71,9 @@ export default {
     },
     hasNext () {
       return (this.nextLink !== '')
+    },
+    hasNextMedia () {
+      return (this.nextMedia !== '')
     }
   },
   mounted () {
@@ -109,6 +115,22 @@ export default {
     next () {
       this.$router.push({ path: this.nextLink })
     },
+    playNext () {
+      if (this.$store.state.repeat === 'repeat_all' && this.hasNextMedia) {
+        this.$router.push({ path: this.nextMedia })
+      } else if (this.$store.state.repeat === 'repeat_one') {
+        let v = document.getElementById('preview-video')
+        let a = document.getElementById('preview-audio')
+        if (v) {
+          v.currentTime = 0
+          v.play()
+        }
+        if (a) {
+          a.currentTime = 0
+          a.play()
+        }
+      }
+    },
     key (event) {
       event.preventDefault()
 
@@ -138,6 +160,25 @@ export default {
 
       if (pos !== this.listing.items.length - 1) {
         this.nextLink = this.listing.items[pos + 1].url
+      }
+
+      let mediapos = null
+      for (let i = pos + 1; i < this.listing.items.length; i++) {
+        if (this.listing.items[i].type === 'audio' || this.listing.items[i].type === 'video') {
+          mediapos = i
+          break
+        }
+      }
+      if (mediapos === null) {
+        for (let i = 0; i < pos; i++) {
+          if (this.listing.items[i].type === 'audio' || this.listing.items[i].type === 'video') {
+            mediapos = i
+            break
+          }
+        }
+      }
+      if (mediapos !== null) {
+        this.nextMedia = this.listing.items[mediapos].url
       }
     },
     allowEdit (event) {
