@@ -89,7 +89,7 @@ export function post (url, content = '', overwrite = false, onupload) {
   })
 }
 
-export function put (url, content = '', publish = false, date = '') {
+export function put (url, content = '', publish = false) {
   url = removePrefix(url)
 
   return new Promise((resolve, reject) => {
@@ -97,10 +97,6 @@ export function put (url, content = '', publish = false, date = '') {
     request.open('PUT', `${store.state.baseURL}/api/resource${url}`, true)
     if (!store.state.noAuth) request.setRequestHeader('Authorization', `Bearer ${store.state.jwt}`)
     request.setRequestHeader('Publish', publish)
-
-    if (date !== '') {
-      request.setRequestHeader('Schedule', date)
-    }
 
     request.onload = () => {
       if (request.status === 200) {

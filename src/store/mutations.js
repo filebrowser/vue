@@ -70,9 +70,6 @@ const mutations = {
     state.clipboard.key = ''
     state.clipboard.items = []
   },
-  setSchedule: (state, value) => {
-    state.schedule = value
-  },
   setProgress: (state, value) => {
     state.progress = value
   }

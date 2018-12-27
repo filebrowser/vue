@@ -17,35 +17,6 @@
       </button>
     </div>
 
-    <div v-if="staticGen.length > 0">
-      <router-link to="/files/settings"
-        :aria-label="$t('sidebar.siteSettings')"
-        :title="$t('sidebar.siteSettings')"
-        class="action">
-        <i class="material-icons">settings</i>
-        <span>{{ $t('sidebar.siteSettings') }}</span>
-      </router-link>
-
-      <template v-if="staticGen === 'hugo'">
-        <button class="action"
-          :aria-label="$t('sidebar.hugoNew')"
-          :title="$t('sidebar.hugoNew')"
-          v-if="user.allowNew"
-          @click="$store.commit('showHover', 'new-archetype')">
-          <i class="material-icons">merge_type</i>
-          <span>{{ $t('sidebar.hugoNew') }}</span>
-        </button>
-      </template>
-
-      <button class="action"
-        :aria-label="$t('sidebar.preview')"
-        :title="$t('sidebar.preview')"
-        @click="preview">
-        <i class="material-icons">remove_red_eye</i>
-        <span>{{ $t('sidebar.preview') }}</span>
-      </button>
-    </div>
-
     <div v-if="!$store.state.noAuth">
       <router-link class="action" to="/settings" :aria-label="$t('sidebar.settings')" :title="$t('sidebar.settings')">
         <i class="material-icons">settings_applications</i>
@@ -72,7 +43,7 @@ import auth from '@/utils/auth'
 export default {
   name: 'sidebar',
   computed: {
-    ...mapState(['user', 'staticGen', 'version']),
+    ...mapState(['user', 'version']),
     active () {
       return this.$store.state.show === 'sidebar'
     }

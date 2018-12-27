@@ -24,7 +24,6 @@ const state = {
   version: '2',
   jwt: '',
   progress: 0,
-  schedule: '',
   loading: false,
   reload: false,
   selected: [],

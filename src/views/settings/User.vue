@@ -36,7 +36,6 @@
         <p><input type="checkbox" :disabled="admin" v-model="allowNew"> {{ $t('settings.allowNew') }}</p>
         <p><input type="checkbox" :disabled="admin" v-model="allowEdit"> {{ $t('settings.allowEdit') }}</p>
         <p><input type="checkbox" :disabled="admin" v-model="allowCommands"> {{ $t('settings.allowCommands') }}</p>
-        <p v-show="$store.state.staticGen.length"><input type="checkbox" :disabled="admin" v-model="allowPublish"> {{ $t('settings.allowPublish') }}</p>
 
         <h3>{{ $t('settings.userCommands') }}</h3>
         <p class="small">{{ $t('settings.userCommandsHelp') }} <i>git svn hg</i>.</p>

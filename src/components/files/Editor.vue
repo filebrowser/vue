@@ -17,7 +17,7 @@ import buttons from '@/utils/buttons'
 export default {
   name: 'editor',
   computed: {
-    ...mapState(['req', 'schedule']),
+    ...mapState(['req']),
     hasMetadata: function () {
       return (this.req.metadata !== undefined && this.req.metadata !== null)
     }
@@ -119,7 +119,6 @@ export default {
     // Saves the file.
     save (event, regenerate = false) {
       let button = regenerate ? 'publish' : 'save'
-      if (this.schedule !== '') button = 'schedule'
       let content = this.content.getValue()
       buttons.loading(button)
 
@@ -127,15 +126,13 @@ export default {
         content = this.metadata.getValue() + '\n\n' + content
       }
 
-      api.put(this.$route.path, content, regenerate, this.schedule)
+      api.put(this.$route.path, content, regenerate)
         .then(() => {
           buttons.success(button)
-          this.$store.commit('setSchedule', '')
         })
         .catch(error => {
           buttons.done(button)
           this.$showError(error)
-          this.$store.commit('setSchedule', '')
         })
     }
   }

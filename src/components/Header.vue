@@ -16,12 +16,6 @@
         <i class="material-icons">save</i>
       </button>
 
-      <template v-if="staticGen.length > 0">
-        <button v-show="showPublishButton" :aria-label="$t('buttons.publish')" :title="$t('buttons.publish')" class="action" id="publish-button">
-          <i class="material-icons">send</i>
-        </button>
-      </template>
-
       <button @click="openMore" id="more" :aria-label="$t('buttons.more')" :title="$t('buttons.more')" class="action">
         <i class="material-icons">more_vert</i>
       </button>
@@ -45,10 +39,6 @@
           <move-button v-show="showMoveButton"></move-button>
           <delete-button v-show="showDeleteButton"></delete-button>
         </div>
-
-        <template v-if="staticGen.length > 0">
-          <schedule-button v-show="showPublishButton"></schedule-button>
-        </template>
 
         <switch-button v-show="showSwitchButton"></switch-button>
         <download-button v-show="showCommonButton"></download-button>
@@ -75,7 +65,6 @@ import DownloadButton from './buttons/Download'
 import SwitchButton from './buttons/SwitchView'
 import MoveButton from './buttons/Move'
 import CopyButton from './buttons/Copy'
-import ScheduleButton from './buttons/Schedule'
 import ShareButton from './buttons/Share'
 import {mapGetters, mapState} from 'vuex'
 import * as api from '@/utils/api'
@@ -93,8 +82,7 @@ export default {
     CopyButton,
     UploadButton,
     SwitchButton,
-    MoveButton,
-    ScheduleButton
+    MoveButton
   },
   data: function () {
     return {
@@ -121,8 +109,7 @@ export default {
       'user',
       'loading',
       'reload',
-      'multiple',
-      'staticGen'
+      'multiple'
     ]),
     isMobile () {
       return this.width <= 736
