@@ -17,7 +17,7 @@ export default {
     ...mapGetters(['selectedCount'])
   },
   methods: {
-    download: function (event) {
+    download: function () {
       // If we are not on a listing, download the current file.
       if (this.req.kind !== 'listing') {
         api.download(null, this.$route.path)

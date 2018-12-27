@@ -267,7 +267,7 @@ export default {
         this.show += 50
       }
     },
-    dragEnter (event) {
+    dragEnter () {
       // When the user starts dragging an item, put every
       // file on the listing with 50% opacity.
       let items = document.getElementsByClassName('item')
@@ -276,7 +276,7 @@ export default {
         file.style.opacity = 0.5
       })
     },
-    dragEnd (event) {
+    dragEnd () {
       this.resetOpacity()
     },
     drop: function (event) {

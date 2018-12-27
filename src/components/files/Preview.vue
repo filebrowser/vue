@@ -99,7 +99,7 @@ export default {
     raw () {
       return `${this.download()}?&inline=true`
     },
-    back (event) {
+    back () {
       let uri = url.removeLastDir(this.$route.path) + '/'
       this.$router.push({ path: uri })
     },
@@ -140,7 +140,7 @@ export default {
         this.nextLink = this.listing.items[pos + 1].url
       }
     },
-    allowEdit (event) {
+    allowEdit () {
       return this.$store.state.user.allowEdit
     }
   }

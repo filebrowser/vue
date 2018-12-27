@@ -107,7 +107,7 @@ export default {
 
       return name.slice(0, -1)
     },
-    saveCommands (event) {
+    saveCommands () {
       let commands = {}
 
       for (let command of this.commands) {
@@ -123,7 +123,7 @@ export default {
         .then(() => { this.$showSuccess(this.$t('settings.commandsUpdated')) })
         .catch(this.$showError)
     },
-    saveCSS (event) {
+    saveCSS () {
       updateSettings(this.css, 'css')
         .then(() => {
           this.$showSuccess(this.$t('settings.settingsUpdated'))
@@ -132,7 +132,7 @@ export default {
         })
         .catch(this.$showError)
     },
-    saveStaticGen (event) {
+    saveStaticGen () {
       let staticGen = {}
 
       for (let field of this.staticGen) {

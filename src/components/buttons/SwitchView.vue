@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     ...mapMutations(['updateUser']),
-    change: function (event) {
+    change: function () {
       // If we are on mobile we should close the dropdown.
       this.$store.commit('closeHovers')
 

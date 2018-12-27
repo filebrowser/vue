@@ -83,7 +83,7 @@ export default {
         password: this.password
       }
 
-      updateUser(user, 'password').then(location => {
+      updateUser(user, 'password').then(() => {
         this.$showSuccess(this.$t('settings.passwordUpdated'))
       }).catch(e => {
         this.$showError(e)
@@ -96,7 +96,7 @@ export default {
       user.css = this.css
       user.locale = this.locale
 
-      updateUser(user, 'partial').then(location => {
+      updateUser(user, 'partial').then(() => {
         this.$store.commit('setUser', user)
         this.$emit('css')
         this.$showSuccess(this.$t('settings.settingsUpdated'))

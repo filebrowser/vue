@@ -110,7 +110,7 @@ export default {
   },
   mounted () {
     this.clip = new Clipboard('.copy-clipboard')
-    this.clip.on('success', (e) => {
+    this.clip.on('success', () => {
       this.$showSuccess(this.$t('success.linkCopied'))
     })
   },
@@ -118,14 +118,14 @@ export default {
     this.clip.destroy()
   },
   methods: {
-    submit: function (event) {
+    submit: function () {
       if (!this.time) return
 
       share(this.url, this.time, this.unit)
         .then(result => { this.links.push(result); this.sort() })
         .catch(this.$showError)
     },
-    getPermalink (event) {
+    getPermalink () {
       share(this.url)
         .then(result => {
           this.links.push(result)

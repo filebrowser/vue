@@ -40,7 +40,7 @@ export default {
   },
   computed: mapState(['req', 'selected', 'selectedCount']),
   methods: {
-    cancel: function (event) {
+    cancel: function () {
       this.$store.commit('closeHovers')
     },
     oldName: function () {
@@ -56,7 +56,7 @@ export default {
 
       return this.req.items[this.selected[0]].name
     },
-    submit: function (event) {
+    submit: function () {
       let oldLink = ''
       let newLink = ''
 

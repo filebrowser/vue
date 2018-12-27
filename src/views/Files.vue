@@ -210,7 +210,7 @@ export default {
         }
       }
     },
-    scroll (event) {
+    scroll () {
       if (this.req.kind !== 'listing' || this.$store.state.user.viewMode === 'mosaic') return
 
       let top = 112 - window.scrollY

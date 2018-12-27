@@ -164,7 +164,7 @@ export default {
       }
     })
 
-    this.scrollable.addEventListener('scroll', (event) => {
+    this.scrollable.addEventListener('scroll', () => {
       if (this.scrollable.scrollTop === (this.scrollable.scrollHeight - this.scrollable.offsetHeight)) {
         this.resultsCount += 50
       }
@@ -172,7 +172,7 @@ export default {
   },
   methods: {
     // Sets the search to active.
-    open (event) {
+    open () {
       this.$store.commit('showHover', 'search')
     },
     // Closes the search and prevents the event
@@ -224,7 +224,7 @@ export default {
       this.commands.length = 0
     },
     // Submits the input to the server and sets ongoing to true.
-    submit (event) {
+    submit () {
       this.ongoing = true
 
       let path = this.$route.path
@@ -240,7 +240,7 @@ export default {
               this.commands.push(event.data)
               this.scrollable.scrollTop = this.scrollable.scrollHeight
             },
-            (event) => {
+            () => {
               this.reload = true
               this.ongoing = false
               this.scrollable.scrollTop = this.scrollable.scrollHeight
@@ -264,7 +264,7 @@ export default {
 
           results.push(response)
         },
-        (event) => {
+        () => {
           this.ongoing = false
           this.search = results
         }

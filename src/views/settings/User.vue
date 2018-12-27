@@ -219,13 +219,13 @@ export default {
       this.css = ''
       this.commands = ''
     },
-    deletePrompt (event) {
+    deletePrompt () {
       this.$store.commit('showHover', 'deleteUser')
     },
     deleteUser (event) {
       event.preventDefault()
 
-      deleteUser(this.id).then(location => {
+      deleteUser(this.id).then(() => {
         this.$router.push({ path: '/settings/users' })
         this.$showSuccess(this.$t('settings.userDeleted'))
       }).catch(e => {
@@ -247,7 +247,7 @@ export default {
         return
       }
 
-      updateUser(user).then(location => {
+      updateUser(user).then(() => {
         if (user.ID === this.$store.state.user.ID) {
           this.$store.commit('setUser', user)
         }

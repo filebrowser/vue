@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     ...mapMutations(['closeHovers']),
-    submit: function (event) {
+    submit: function () {
       this.closeHovers()
       buttons.loading('delete')
 

@@ -13,7 +13,7 @@
 export default {
   name: 'schedule-button',
   methods: {
-    show: function (event) {
+    show: function () {
       this.$store.commit('showHover', 'schedule')
     }
   }
