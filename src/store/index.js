@@ -13,11 +13,10 @@ const state = {
     key: '',
     items: []
   },
-  recaptcha: '',
-  // TODO:
+  recaptcha: document.querySelector('meta[name="recaptcha"]').getAttribute('content'),
   baseURL: document.querySelector('meta[name="base"]').getAttribute('content'),
   signup: document.querySelector('meta[name="signup"]').getAttribute('content') === 'true',
-  version: '2',
+  version: document.querySelector('meta[name="version"]').getAttribute('content'),
   jwt: '',
   progress: 0,
   loading: false,

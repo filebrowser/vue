@@ -6,9 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
   <!-- Inject some variables -->
-  <!-- TODO: readd recaptcha -->
   <meta name="base" content="[{[ .BaseURL ]}]">
   <meta name="signup" content="[{[ .Signup ]}]">
+  <meta name="version" content="{{ .Version }}">
+  <meta name="recaptcha" content="[{[ .ReCaptchaKey ]}]">
+
+  {{ if .ReCaptcha -}}
+    <script src="{{ .ReCaptchaHost }}/recaptcha/api.js?render=explicit"></script>
+  {{ end }}
 
   <title>File Browser</title>
 
