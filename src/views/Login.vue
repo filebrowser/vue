@@ -3,11 +3,16 @@
     <form @submit="submit">
       <img src="../assets/logo.svg" alt="File Browser">
       <h1>File Browser</h1>
-      <div v-if="wrong" class="wrong">{{ $t("login.wrongCredentials") }}</div>
+      <div v-if="error !== ''" class="wrong">{{ error }}</div>
+
       <input type="text" v-model="username" :placeholder="$t('login.username')">
       <input type="password" v-model="password" :placeholder="$t('login.password')">
+      <input v-if="createMode" type="password" v-model="passwordConfirm" :placeholder="$t('login.passwordConfirm')" />
+
       <div v-if="recaptcha.length" id="recaptcha"></div>
-      <input type="submit" :value="$t('login.submit')">
+      <input type="submit" :value="createMode ? $t('login.signup') : $t('login.submit')">
+
+      <p @click="toggleMode" v-if="signup">{{ createMode ? $t('login.loginInstead') : $t('login.createAnAccount') }}</p>
     </form>
   </div>
 </template>
@@ -19,12 +24,14 @@ import { mapState } from 'vuex'
 export default {
   name: 'login',
   props: ['dependencies'],
-  computed: mapState(['recaptcha']),
+  computed: mapState([ 'recaptcha', 'signup' ]),
   data: function () {
     return {
-      wrong: false,
+      createMode: false,
+      error: '',
       username: '',
-      password: ''
+      password: '',
+      passwordConfirm: ''
     }
   },
   mounted () {
@@ -43,7 +50,10 @@ export default {
         sitekey: this.recaptcha
       })
     },
-    submit (event) {
+    toggleMode () {
+      this.createMode = !this.createMode
+    },
+    async submit (event) {
       event.preventDefault()
       event.stopPropagation()
 
@@ -57,14 +67,32 @@ export default {
         captcha = window.grecaptcha.getResponse()
 
         if (captcha === '') {
-          this.wrong = true
+          this.error = this.$t('login.wrongCredentials')
           return
         }
       }
 
-      auth.login(this.username, this.password, captcha)
-        .then(() => { this.$router.push({ path: redirect }) })
-        .catch(() => { this.wrong = true })
+      if (this.createMode) {
+        if (this.password !== this.passwordConfirm) {
+          this.error = this.$t('login.passwordsDontMatch')
+          return
+        }
+      }
+
+      try {
+        if (this.createMode) {
+          await auth.signup(this.username, this.password)
+        }
+
+        await auth.login(this.username, this.password, captcha)
+        this.$router.push({ path: redirect })
+      } catch (e) {
+        if (e.message == 409) {
+          this.error = this.$t('login.usernameTaken')
+        } else {
+          this.error = this.$t('login.wrongCredentials')
+        }
+      }
     }
   }
 }

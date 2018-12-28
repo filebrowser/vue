@@ -16,6 +16,7 @@ const state = {
   recaptcha: '',
   // TODO:
   baseURL: document.querySelector('meta[name="base"]').getAttribute('content'),
+  signup: document.querySelector('meta[name="signup"]').getAttribute('content') === 'true',
   version: '2',
   jwt: '',
   progress: 0,

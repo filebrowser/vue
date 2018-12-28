@@ -56,6 +56,22 @@ async function login (username, password, recaptcha) {
   }
 }
 
+async function signup (username, password) {
+  const data = { username, password }
+
+  const res = await fetch(`${store.state.baseURL}/api/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+
+  if (res.status !== 200) {
+    throw new Error(res.status)
+  }
+}
+
 function logout () {
   store.commit('setJWT', '')
   localStorage.setItem('jwt', null)
@@ -65,5 +81,6 @@ function logout () {
 export default {
   loggedIn: loggedIn,
   login: login,
-  logout: logout
+  logout: logout,
+  signup: signup
 }

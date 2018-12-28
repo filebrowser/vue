@@ -75,7 +75,13 @@
   },
   "login": {
     "password": "Password",
+    "passwordConfirm": "Password Confirmation",
     "submit": "Login",
+    "createAnAccount": "Create an account",
+    "loginInstead": "Already have an account",
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameTaken": "Username already taken",
+    "signup": "Signup",
     "username": "Username",
     "wrongCredentials": "Wrong credentials"
   },

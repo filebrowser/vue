@@ -74,3 +74,13 @@
 #login input[type="password"]:hover {
   border-color: #9f9f9f;
 }
+
+#login p {
+  cursor: pointer;
+  text-align: right;
+  color: #2196f3;
+  text-transform: lowercase;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin: .5rem 0;
+}
