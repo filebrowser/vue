@@ -6,7 +6,7 @@
       </button>
       <i v-else class="material-icons">search</i>
       <input type="text"
-        @keyup="keyup"
+        @keyup.exact="keyup"
         @keyup.enter="submit"
         ref="input"
         :autofocus="active"
