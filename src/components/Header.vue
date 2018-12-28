@@ -67,7 +67,7 @@ import MoveButton from './buttons/Move'
 import CopyButton from './buttons/Copy'
 import ShareButton from './buttons/Share'
 import {mapGetters, mapState} from 'vuex'
-import * as api from '@/utils/api'
+import * as api from '@/api'
 import buttons from '@/utils/buttons'
 
 export default {

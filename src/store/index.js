@@ -13,11 +13,6 @@ const state = {
     key: '',
     items: []
   },
-  css: (() => {
-    let css = window.CSS
-    window.CSS = null
-    return css
-  })(),
   recaptcha: '',
   // TODO:
   baseURL: document.querySelector('meta[name="base"]').getAttribute('content'),

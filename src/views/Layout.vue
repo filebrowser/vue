@@ -6,7 +6,7 @@
     <site-header></site-header>
     <sidebar></sidebar>
     <main>
-      <router-view @css="$emit('update:css')"></router-view>
+      <router-view></router-view>
     </main>
     <prompts></prompts>
   </div>
@@ -30,12 +30,6 @@ export default {
       this.$store.commit('multiple', false)
       if (this.$store.state.show !== 'success') this.$store.commit('closeHovers')
     }
-  },
-  mounted () {
-    this.$emit('update:css')
-  },
-  beforeDestroy () {
-    this.$emit('clean:css')
   }
 }
 </script>

@@ -19,7 +19,7 @@
 
         <p>
           <label for="scope">{{ $t('settings.scope') }}</label>
-          <input type="text" v-model="filesystem" id="scope">
+          <input type="text" v-model="scope" id="scope">
         </p>
 
         <p>
@@ -32,14 +32,19 @@
         <h3>{{ $t('settings.permissions') }}</h3>
         <p class="small">{{ $t('settings.permissionsHelp') }}</p>
 
-        <p><input type="checkbox" v-model="admin"> {{ $t('settings.administrator') }}</p>
-        <p><input type="checkbox" :disabled="admin" v-model="allowNew"> {{ $t('settings.allowNew') }}</p>
-        <p><input type="checkbox" :disabled="admin" v-model="allowEdit"> {{ $t('settings.allowEdit') }}</p>
-        <p><input type="checkbox" :disabled="admin" v-model="allowCommands"> {{ $t('settings.allowCommands') }}</p>
+        <p><input type="checkbox" v-model="perm.admin"> {{ $t('settings.administrator') }}</p>
+      
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.create"> {{ $t('settings.create') }}</p>
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.delete"> {{ $t('settings.delete') }}</p>
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.download"> {{ $t('settings.download') }}</p>
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.edit"> {{ $t('settings.edit') }}</p>
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.execute"> {{ $t('settings.execute') }}</p>
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.rename"> {{ $t('settings.rename') }}</p>
+        <p><input type="checkbox" :disabled="perm.admin" v-model="perm.share"> {{ $t('settings.share') }}</p>
 
         <h3>{{ $t('settings.userCommands') }}</h3>
         <p class="small">{{ $t('settings.userCommandsHelp') }} <i>git svn hg</i>.</p>
-        <input type="text" v-model.trim="commands">
+        <input type="text" v-model.trim="perm.commands">
 
         <h3>{{ $t('settings.rules') }}</h3>
 
@@ -57,10 +62,6 @@
         </ul>
 
         <textarea v-model.trim="rules"></textarea>
-
-        <h3>{{ $t('settings.customStylesheet') }}</h3>
-
-        <textarea name="css"></textarea>
       </div>
 
       <div class="card-action">
@@ -93,7 +94,7 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { getUser, newUser, updateUser, deleteUser } from '@/utils/api'
+import { users as api } from '@/api'
 import Languages from '@/components/Languages'
 
 export default {
@@ -103,20 +104,22 @@ export default {
     return {
       originalUser: null,
       id: 0,
-      admin: false,
-      allowNew: false,
-      allowEdit: false,
-      allowCommands: false,
-      allowPublish: false,
-      lockPassword: false,
-      permissions: {},
+      perm: {
+        admin: true,
+        create: true,
+        delete: true,
+        download: true,
+        edit: true,
+        execute: true,
+        rename: true,
+        share: true,
+        commands: '',
+      },
       password: '',
       username: '',
-      filesystem: '',
+      scope: '',
       rules: '',
-      locale: '',
-      css: '',
-      commands: ''
+      locale: ''
     }
   },
   computed: {
@@ -130,45 +133,52 @@ export default {
   },
   watch: {
     '$route': 'fetchData',
-    admin: function () {
-      if (!this.admin) return
-      this.allowCommands = true
-      this.allowEdit = true
-      this.allowNew = true
-      this.allowPublish = true
+    'perm.admin': function () {
+      if (!this.perm.admin) return
       this.lockPassword = false
-      for (let key in this.permissions) {
-        this.permissions[key] = true
+      
+      for (const key in this.perm) {
+        if (key === 'commands') continue
+        this.perm[key] = true
       }
     }
   },
   methods: {
     ...mapMutations(['closeHovers']),
-    fetchData () {
-      let user = this.$route.params[0]
+    async fetchData () {
+      let id = this.$route.params.pathMatch
 
       if (this.$route.path === '/settings/users/new') {
-        user = 'base'
+        id = 'base'
       }
 
-      getUser(user).then(user => {
-        this.originalUser = user
-        this.id = user.ID
-        this.admin = user.admin
-        this.allowCommands = user.allowCommands
-        this.allowNew = user.allowNew
-        this.allowEdit = user.allowEdit
-        this.allowPublish = user.allowPublish
-        this.lockPassword = user.lockPassword
-        this.filesystem = user.filesystem
-        this.username = user.username
-        this.css = user.css
-        this.permissions = user.permissions
-        this.locale = user.locale
+      try {
+        const user = await api.get(id)
 
-        if (user.commands) {
-          this.commands = user.commands.join(' ')
+        this.originalUser = user
+        this.id = user.id
+        this.locale = user.locale
+        this.perm = user.perm
+        this.scope = user.scope
+        this.username = user.username
+
+        // TODO:Lock Pwd ?
+
+        if (this.perm.commands) {
+          this.perm.commands = this.perm.commands.join(' ')
         }
+
+        /* for (const rule of user.rules) {
+          console.log(rule)
+        } */
+
+        console.log(user)
+
+      } catch (e) {
+        console.error(e)
+      }
+
+      /*   
 
         for (let rule of user.rules) {
           if (rule.allow) {
@@ -189,7 +199,7 @@ export default {
         this.rules = this.rules.trim()
       }).catch(() => {
         this.$router.push({ path: '/settings/users/new' })
-      })
+      }) */
     },
     capitalize (name) {
       let splitted = name.split(/(?=[A-Z])/)
@@ -215,7 +225,6 @@ export default {
       this.filesystem = ''
       this.rules = ''
       this.locale = ''
-      this.css = ''
       this.commands = ''
     },
     deletePrompt () {
@@ -268,7 +277,6 @@ export default {
       user.allowEdit = this.allowEdit
       user.allowPublish = this.allowPublish
       user.permissions = this.permissions
-      user.css = this.css
       user.locale = this.locale
       user.commands = this.commands.split(' ')
       user.rules = []

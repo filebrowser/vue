@@ -1,19 +1,5 @@
 <template>
   <div class="dashboard">
-    <form class="card" @submit.prevent="saveCSS">
-      <div class="card-title">
-        <h2>{{ $t('settings.customStylesheet') }}</h2>
-      </div>
-
-      <div class="card-content">
-        <textarea v-model="css"></textarea>
-      </div>
-
-      <div class="card-action">
-        <input class="flat" type="submit" :value="$t('buttons.update')">
-      </div>
-    </form>
-
     <form class="card" @submit.prevent="saveCommands">
       <div class="card-title">
         <h2>{{ $t('settings.commands') }}</h2>
@@ -50,8 +36,7 @@ export default {
   name: 'settings',
   data: function () {
     return {
-      commands: [],
-      css: ''
+      commands: []
     }
   },
   computed: {
@@ -66,8 +51,6 @@ export default {
             value: settings.commands[key].join('\n')
           })
         }
-
-        this.css = settings.css
       })
       .catch(this.$showError)
   },
@@ -97,15 +80,6 @@ export default {
 
       updateSettings(commands, 'commands')
         .then(() => { this.$showSuccess(this.$t('settings.commandsUpdated')) })
-        .catch(this.$showError)
-    },
-    saveCSS () {
-      updateSettings(this.css, 'css')
-        .then(() => {
-          this.$showSuccess(this.$t('settings.settingsUpdated'))
-          this.$store.commit('setCSS', this.css)
-          this.$emit('css')
-        })
         .catch(this.$showError)
     }
   }

@@ -8,8 +8,6 @@
       <div class="card-content">
         <h3>{{ $t('settings.language') }}</h3>
         <p><languages id="locale" :selected.sync="locale"></languages></p>
-        <h3>{{ $t('settings.customStylesheet') }}</h3>
-        <textarea v-model="css" name="css"></textarea>
       </div>
 
       <div class="card-action">
@@ -48,7 +46,6 @@ export default {
     return {
       password: '',
       passwordConf: '',
-      css: '',
       locale: ''
     }
   },
@@ -67,7 +64,6 @@ export default {
     }
   },
   created () {
-    this.css = this.user.css
     this.locale = this.user.locale
   },
   methods: {
@@ -93,12 +89,10 @@ export default {
       event.preventDefault()
 
       let user = {...this.$store.state.user}
-      user.css = this.css
       user.locale = this.locale
 
       updateUser(user, 'partial').then(() => {
         this.$store.commit('setUser', user)
-        this.$emit('css')
         this.$showSuccess(this.$t('settings.settingsUpdated'))
       }).catch(e => {
         this.$showError(e)

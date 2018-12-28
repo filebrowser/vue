@@ -33,7 +33,7 @@
 import { mapMutations, mapGetters, mapState } from 'vuex'
 import filesize from 'filesize'
 import moment from 'moment'
-import * as api from '@/utils/api'
+import { files as api } from '@/api'
 
 export default {
   name: 'item',
