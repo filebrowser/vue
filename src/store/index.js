@@ -8,6 +8,7 @@ Vue.use(Vuex)
 const state = {
   user: {},
   req: {},
+  oldReq: {},
   clipboard: {
     key: '',
     items: []
@@ -20,7 +21,6 @@ const state = {
   recaptcha: '',
   // TODO:
   baseURL: document.querySelector('meta[name="base"]').getAttribute('content'),
-  noAuth: false,
   version: '2',
   jwt: '',
   progress: 0,

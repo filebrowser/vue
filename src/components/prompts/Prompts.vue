@@ -10,7 +10,6 @@
     <move v-else-if="showMove"></move>
     <copy v-else-if="showCopy"></copy>
     <replace v-else-if="showReplace"></replace>
-    <new-archetype v-else-if="show === 'new-archetype'"></new-archetype>
     <share v-else-if="show === 'share'"></share>
     <div v-show="showOverlay" @click="resetPrompts" class="overlay"></div>
   </div>
@@ -26,7 +25,6 @@ import Move from './Move'
 import Copy from './Copy'
 import NewFile from './NewFile'
 import NewDir from './NewDir'
-import NewArchetype from './NewArchetype'
 import Replace from './Replace'
 import Share from './Share'
 import { mapState } from 'vuex'
@@ -38,7 +36,6 @@ export default {
   components: {
     Info,
     Delete,
-    NewArchetype,
     Rename,
     Download,
     Move,

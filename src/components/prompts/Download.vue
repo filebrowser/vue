@@ -12,13 +12,15 @@
       <button class="block cancel" @click="download('targz')" v-focus>tar.gz</button>
       <button class="block cancel" @click="download('tarbz2')" v-focus>tar.bz2</button>
       <button class="block cancel" @click="download('tarxz')" v-focus>tar.xz</button>
+      <button class="block cancel" @click="download('tarlz4')" v-focus>tar.lz4</button>
+      <button class="block cancel" @click="download('tarsz')" v-focus>tar.sz</button>
     </div>
   </div>
 </template>
 
 <script>
 import {mapGetters, mapState} from 'vuex'
-import * as api from '@/utils/api'
+import { files as api } from '@/api'
 
 export default {
   name: 'download',

@@ -5,8 +5,8 @@
         <i class="material-icons">close</i>
       </button>
 
-      <rename-button v-if="allowEdit()"></rename-button>
-      <delete-button v-if="allowEdit()"></delete-button>
+      <rename-button v-if="user.perm.rename"></rename-button>
+      <delete-button v-if="user.perm.delete"></delete-button>
       <download-button></download-button>
       <info-button></info-button>
     </div>
@@ -19,16 +19,21 @@
     </button>
 
     <div class="preview">
-      <img v-if="req.type == 'image'" :src="raw()">
-      <audio v-else-if="req.type == 'audio'" :src="raw()" autoplay controls></audio>
-      <video v-else-if="req.type == 'video'" :src="raw()" autoplay controls>
-        <track v-for="(sub, index) in subtitles" :kind="sub.kind" :src="'/api/subtitle/' + sub.src" :label="sub.label" :default="index === 0">
+      <img v-if="req.type == 'image'" :src="raw">
+      <audio v-else-if="req.type == 'audio'" :src="raw" autoplay controls></audio>
+      <video v-else-if="req.type == 'video'" :src="raw" autoplay controls>
+        <track
+          kind="captions"
+          v-for="(sub, index) in subtitles"
+          :key="index"
+          :src="sub"
+          :label="'Subtitle ' + index" :default="index === 0">
         Sorry, your browser doesn't support embedded videos,
-        but don't worry, you can <a :href="download()">download it</a>
+        but don't worry, you can <a :href="download">download it</a>
         and watch it with your favorite video player!
       </video>
-      <object v-else-if="req.extension == '.pdf'" class="pdf" :data="raw()"></object>
-      <a v-else-if="req.type == 'blob'" :href="download()">
+      <object v-else-if="req.extension == '.pdf'" class="pdf" :data="raw"></object>
+      <a v-else-if="req.type == 'blob'" :href="download">
         <h2 class="message">{{ $t('buttons.download') }} <i class="material-icons">file_download</i></h2>
       </a>
       <pre v-else >{{ req.content }}</pre>
@@ -39,7 +44,7 @@
 <script>
 import { mapState } from 'vuex'
 import url from '@/utils/url'
-import * as api from '@/utils/api'
+import { files as api } from '@/api'
 import InfoButton from '@/components/buttons/Info'
 import DeleteButton from '@/components/buttons/Delete'
 import RenameButton from '@/components/buttons/Rename'
@@ -62,43 +67,43 @@ export default {
     }
   },
   computed: {
-    ...mapState(['req', 'oldReq']),
+    ...mapState(['req', 'user', 'oldReq', 'baseURL', 'jwt']),
     hasPrevious () {
       return (this.previousLink !== '')
     },
     hasNext () {
       return (this.nextLink !== '')
+    },
+    download () {
+      return `${this.baseURL}/api/raw${this.req.path}?auth=${this.jwt}`
+    },
+    raw () {
+      return `${this.download}&inline=true`
     }
   },
-  mounted () {
+  async mounted () {
     window.addEventListener('keyup', this.key)
-    api.fetch(url.removeLastDir(this.$route.path))
-      .then(req => {
-        this.listing = req
-        this.updateLinks()
-      })
-      .catch(this.$showError)
-    if (this.req.type === 'audio' || this.req.type === 'video') {
-      api.subtitles(this.req.url.slice(6))
-        .then(req => {
-          this.subtitles = req
-        })
-        .catch(this.$showError)
+
+    if (this.req.subtitles) {
+      this.subtitles = this.req.subtitles.map(sub => `${this.baseURL}/api/raw${sub}?auth=${this.jwt}&inline=true`)
+    }
+
+    try {
+      if (this.oldReq.items) {
+        this.updateLinks(this.oldReq.items)
+      } else {
+        const path = url.removeLastDir(this.$route.path)
+        const res = await api.fetch(path)
+        this.updateLinks(res.items)
+      }
+    } catch (e) {
+      this.$showError(e)
     }
   },
   beforeDestroy () {
     window.removeEventListener('keyup', this.key)
   },
   methods: {
-    download () {
-      let url = `${this.$store.state.baseURL}/api/download`
-      url += this.req.url.slice(6)
-
-      return url
-    },
-    raw () {
-      return `${this.download()}?&inline=true`
-    },
     back () {
       let uri = url.removeLastDir(this.$route.path) + '/'
       this.$router.push({ path: uri })
@@ -118,30 +123,22 @@ export default {
         if (this.hasPrevious) this.prev()
       }
     },
-    updateLinks () {
-      let pos = null
-
-      for (let i = 0; i < this.listing.items.length; i++) {
-        if (this.listing.items[i].name === this.req.name) {
-          pos = i
-          break
+    updateLinks (items) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].name !== this.req.name) {
+          continue
         }
-      }
 
-      if (pos === null) {
+        if (i !== 0) {
+          this.previousLink = items[i - 1].url
+        }
+
+        if (i !== items.length - 1) {
+          this.nextLink = items[i + 1].url
+        }
+
         return
       }
-
-      if (pos !== 0) {
-        this.previousLink = this.listing.items[pos - 1].url
-      }
-
-      if (pos !== this.listing.items.length - 1) {
-        this.nextLink = this.listing.items[pos + 1].url
-      }
-    },
-    allowEdit () {
-      return this.$store.state.user.allowEdit
     }
   }
 }

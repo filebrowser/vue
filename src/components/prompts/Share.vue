@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { getShare, deleteShare, share } from '@/utils/api'
+import { mapState, mapGetters } from 'vuex'
+import { share as api } from '@/api'
 import moment from 'moment'
 import Clipboard from 'clipboard'
 
@@ -76,9 +76,9 @@ export default {
   },
   computed: {
     ...mapState([ 'baseURL', 'req', 'selected', 'selectedCount' ]),
+    ...mapGetters([ 'isListing' ]),
     url () {
-      // Get the current name of the file we are editing.
-      if (this.req.kind !== 'listing') {
+      if (!this.isListing) {
         return this.$route.path
       }
 
@@ -90,23 +90,21 @@ export default {
       return this.req.items[this.selected[0]].url
     }
   },
-  beforeMount () {
-    getShare(this.url)
-      .then(links => {
-        this.links = links
-        this.sort()
+  async beforeMount () {
+    try {
+      const links = await api.get(this.url)
+      this.links = links
+      this.sort()
 
-        for (let link of this.links) {
-          if (!link.expires) {
-            this.hasPermanent = true
-            break
-          }
+      for (let link of this.links) {
+        if (!link.expires) {
+          this.hasPermanent = true
+          break
         }
-      })
-      .catch(error => {
-        if (error === 404) return
-        this.$showError(error)
-      })
+      }
+    } catch (e) {
+      this.$showError(e)
+    }
   },
   mounted () {
     this.clip = new Clipboard('.copy-clipboard')
@@ -118,30 +116,36 @@ export default {
     this.clip.destroy()
   },
   methods: {
-    submit: function () {
+    submit: async function () {
       if (!this.time) return
 
-      share(this.url, this.time, this.unit)
-        .then(result => { this.links.push(result); this.sort() })
-        .catch(this.$showError)
+      try {
+        const res = await api.create(this.url, this.time, this.unit)
+        this.links.push(res)
+        this.sort()
+      } catch (e) {
+        this.$showError(e)
+      }
     },
-    getPermalink () {
-      share(this.url)
-        .then(result => {
-          this.links.push(result)
-          this.sort()
-          this.hasPermanent = true
-        })
-        .catch(this.$showError)
+    getPermalink: async function () {
+      try {
+        const res = await api.create(this.url)
+        this.links.push(res)
+        this.sort()
+        this.hasPermanent = true
+      } catch (e) {
+        this.$showError(e)
+      }
     },
-    deleteLink (event, link) {
+    deleteLink: async function (event, link) {
       event.preventDefault()
-      deleteShare(link.hash)
-        .then(() => {
-          if (!link.expires) this.hasPermanent = false
-          this.links = this.links.filter(item => item.hash !== link.hash)
-        })
-        .catch(this.$showError)
+       try {
+        await api.remove(link.hash)
+        if (!link.expires) this.hasPermanent = false
+        this.links = this.links.filter(item => item.hash !== link.hash)
+      } catch (e) {
+        this.$showError(e)
+      }
     },
     humanTime (time) {
       return moment(time).fromNow()

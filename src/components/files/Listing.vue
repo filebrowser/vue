@@ -49,7 +49,6 @@
     <h2 v-if="req.numDirs > 0">{{ $t('files.folders') }}</h2>
     <div v-if="req.numDirs > 0">
       <item v-for="(item) in dirs"
-        v-if="item.isDir"
         :key="base64(item.name)"
         v-bind:index="item.index"
         v-bind:name="item.name"
@@ -64,7 +63,6 @@
     <h2 v-if="req.numFiles > 0">{{ $t('files.files') }}</h2>
     <div v-if="req.numFiles > 0">
       <item v-for="(item) in files"
-        v-if="!item.isDir"
         :key="base64(item.name)"
         v-bind:index="item.index"
         v-bind:name="item.name"
@@ -91,7 +89,7 @@
 import {mapState} from 'vuex'
 import Item from './ListingItem'
 import css from '@/utils/css'
-import * as api from '@/utils/api'
+import { files as api } from '@/api'
 import buttons from '@/utils/buttons'
 
 export default {
@@ -120,9 +118,7 @@ export default {
       const dirs = []
       const files = []
 
-      this.req.items.forEach((item, index) => {
-        item.index = index
-
+      this.req.items.forEach((item) => {
         if (item.isDir) {
           dirs.push(item)
         } else {

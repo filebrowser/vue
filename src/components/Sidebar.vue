@@ -5,7 +5,7 @@
       <span>{{ $t('sidebar.myFiles') }}</span>
     </router-link>
 
-    <div v-if="user.allowNew">
+    <div v-if="user.perm.create">
       <button @click="$store.commit('showHover', 'newDir')" class="action" :aria-label="$t('sidebar.newFolder')" :title="$t('sidebar.newFolder')">
         <i class="material-icons">create_new_folder</i>
         <span>{{ $t('sidebar.newFolder') }}</span>
@@ -17,7 +17,7 @@
       </button>
     </div>
 
-    <div v-if="!$store.state.noAuth">
+    <div>
       <router-link class="action" to="/settings" :aria-label="$t('sidebar.settings')" :title="$t('sidebar.settings')">
         <i class="material-icons">settings_applications</i>
         <span>{{ $t('sidebar.settings') }}</span>
@@ -51,9 +51,6 @@ export default {
   methods: {
     help () {
       this.$store.commit('showHover', 'help')
-    },
-    preview () {
-      window.open(this.$store.state.baseURL + '/preview/')
     },
     logout: auth.logout
   }

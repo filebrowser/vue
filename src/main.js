@@ -4,6 +4,7 @@ import store from './store'
 import router from './router'
 import i18n from './i18n'
 import Noty from 'noty'
+import { sync } from 'vuex-router-sync'
 
 Vue.config.productionTip = true
 
@@ -27,7 +28,7 @@ Vue.prototype.$showSuccess = function (message) {
 
 Vue.prototype.$showError = function (error) {
   let n = new Noty(Object.assign({}, notyDefault, {
-    text: error,
+    text: error.message || error,
     type: 'error',
     timeout: null,
     buttons: [
@@ -48,6 +49,8 @@ Vue.directive('focus', {
     el.focus()
   }
 })
+
+sync(store, router)
 
 /* eslint-disable no-new */
 new Vue({

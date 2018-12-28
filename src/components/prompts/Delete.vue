@@ -19,61 +19,47 @@
 
 <script>
 import {mapGetters, mapMutations, mapState} from 'vuex'
-import { remove } from '@/utils/api'
+import { files as api } from '@/api'
 import url from '@/utils/url'
 import buttons from '@/utils/buttons'
 
 export default {
   name: 'delete',
   computed: {
-    ...mapGetters(['selectedCount']),
+    ...mapGetters(['isListing', 'selectedCount']),
     ...mapState(['req', 'selected'])
   },
   methods: {
     ...mapMutations(['closeHovers']),
-    submit: function () {
+    submit: async function () {
       this.closeHovers()
       buttons.loading('delete')
 
-      // If we are not on a listing, delete the current
-      // opened file.
-      if (this.req.kind !== 'listing') {
-        remove(this.$route.path)
-          .then(() => {
-            buttons.success('delete')
-            this.$router.push({ path: url.removeLastDir(this.$route.path) + '/' })
-          })
-          .catch(error => {
-            buttons.done('delete')
-            this.$showError(error)
-          })
-
-        return
-      }
-
-      if (this.selectedCount === 0) {
-        // This shouldn't happen...
-        return
-      }
-
-      // Create the promises array and fill it with
-      // the delete request for every selected file.
-      let promises = []
-
-      for (let index of this.selected) {
-        promises.push(remove(this.req.items[index].url))
-      }
-
-      Promise.all(promises)
-        .then(() => {
+      try {
+        if (!this.isListing) {
+          await api.remove(this.$route.path)
           buttons.success('delete')
-          this.$store.commit('setReload', true)
-        })
-        .catch(error => {
-          buttons.done('delete')
-          this.$store.commit('setReload', true)
-          this.$showError(error)
-        })
+          this.$router.push({ path: url.removeLastDir(this.$route.path) + '/' })
+          return
+        }
+
+        if (this.selectedCount === 0) {
+          return
+        }
+
+        let promises = []
+        for (let index of this.selected) {
+          promises.push(api.remove(this.req.items[index].url))
+        }
+
+        await Promise.all(promises)
+        buttons.success('delete')
+        this.$store.commit('setReload', true)
+      } catch (e) {
+        buttons.done('delete')
+        this.$showError(e)
+        if (this.isListing) this.$store.commit('setReload', true)
+      }
     }
   }
 }

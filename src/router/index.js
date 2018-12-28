@@ -25,14 +25,12 @@ const router = new Router({
       name: 'Login',
       component: Login,
       beforeEnter: function (to, from, next) {
-        auth.loggedIn()
-          .then(() => {
-            next({ path: '/files' })
-          })
-          .catch(() => {
-            document.title = 'Login'
-            next()
-          })
+        if (auth.loggedIn()) {
+          return next({ path: '/files' })
+        }
+
+        document.title = 'Login'
+        next()
       }
     },
     {
@@ -53,9 +51,6 @@ const router = new Router({
           component: Settings,
           redirect: {
             path: '/settings/profile'
-          },
-          meta: {
-            disableOnNoAuth: true
           },
           children: [
             {
@@ -127,32 +122,21 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    auth.loggedIn()
-      .then(() => {
-        if (to.matched.some(record => record.meta.requiresAdmin)) {
-          if (!store.state.user.admin) {
-            next({ path: '/403' })
-            return
-          }
-        }
-
-        if (to.matched.some(record => record.meta.disableOnNoAuth)) {
-          if (store.state.noAuth) {
-            next({ path: '/403' })
-            return
-          }
-        }
-
-        next()
-      })
-      .catch(() => {
-        next({
-          path: '/login',
-          query: { redirect: to.fullPath }
-        })
+    if (!auth.loggedIn()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
       })
 
-    return
+      return
+    }
+    
+    if (to.matched.some(record => record.meta.requiresAdmin)) {
+      if (!store.state.user.perm.admin) {
+        next({ path: '/403' })
+        return
+      }
+    }
   }
 
   next()

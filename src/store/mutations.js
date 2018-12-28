@@ -60,6 +60,7 @@ const mutations = {
     }
   },
   updateRequest: (state, value) => {
+    state.oldReq = state.req
     state.req = value
   },
   updateClipboard: (state, value) => {

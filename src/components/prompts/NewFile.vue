@@ -10,52 +10,62 @@
     </div>
 
     <div class="card-action">
-      <button class="cancel flat"
+      <button
+        class="cancel flat"
         @click="$store.commit('closeHovers')"
         :aria-label="$t('buttons.cancel')"
-        :title="$t('buttons.cancel')">{{ $t('buttons.cancel') }}</button>
-      <button class="flat"
+        :title="$t('buttons.cancel')"
+      >{{ $t('buttons.cancel') }}</button>
+      <button
+        class="flat"
         @click="submit"
         :aria-label="$t('buttons.create')"
-        :title="$t('buttons.create')">{{ $t('buttons.create') }}</button>
+        :title="$t('buttons.create')"
+      >{{ $t('buttons.create') }}</button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import { files as api } from '@/api'
 import url from '@/utils/url'
-import * as api from '@/utils/api'
 
 export default {
   name: 'new-file',
-  data: function () {
+  data: function() {
     return {
       name: ''
-    }
+    };
+  },
+  computed: {
+    ...mapGetters(['isListing'])
   },
   methods: {
-    submit: function (event) {
+    submit: async function(event) {
       event.preventDefault()
       if (this.new === '') return
 
-      // Build the path of the new file.
-      let uri = this.$route.path
-      if (this.$store.state.req.kind !== 'listing') {
+      // Build the path of the new directory.
+      let uri = this.$route.path + '/'
+
+      if (!this.isListing) {
         uri = url.removeLastDir(uri) + '/'
       }
 
       uri += this.name
       uri = uri.replace('//', '/')
 
-      // Create the new file.
-      api.post(uri)
-        .then(() => { this.$router.push({ path: uri }) })
-        .catch(this.$showError)
+      try {
+        await api.post(uri)
+        this.$router.push({ path: uri })
+      } catch (e) {
+        this.$showError(e)
+      }
 
-      // Close the prompt.
       this.$store.commit('closeHovers')
     }
   }
-}
+};
 </script>
 

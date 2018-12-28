@@ -12,7 +12,7 @@
         <i class="material-icons">search</i>
       </button>
 
-      <button v-show="showSaveButton" :aria-label="$t('buttons.save')" :title="$t('buttons.save')" class="action" id="save-button">
+      <button v-show="isEditor" :aria-label="$t('buttons.save')" :title="$t('buttons.save')" class="action" id="save-button">
         <i class="material-icons">save</i>
       </button>
 
@@ -23,9 +23,9 @@
       <!-- Menu that shows on listing AND mobile when there are files selected -->
       <div id="file-selection" v-if="isMobile && req.kind === 'listing'">
         <span v-if="selectedCount > 0">{{ selectedCount }} selected</span>
-        <share-button v-show="showRenameButton"></share-button>
+        <share-button v-show="showShareButton"></share-button>
         <rename-button v-show="showRenameButton"></rename-button>
-        <copy-button v-show="showMoveButton"></copy-button>
+        <copy-button v-show="showCopyButton"></copy-button>
         <move-button v-show="showMoveButton"></move-button>
         <delete-button v-show="showDeleteButton"></delete-button>
       </div>
@@ -33,19 +33,19 @@
       <!-- This buttons are shown on a dropdown on mobile phones -->
       <div id="dropdown" :class="{ active: showMore }">
         <div v-if="!isListing || !isMobile">
-          <share-button v-show="showRenameButton"></share-button>
+          <share-button v-show="showShareButton"></share-button>
           <rename-button v-show="showRenameButton"></rename-button>
-          <copy-button v-show="showMoveButton"></copy-button>
+          <copy-button v-show="showCopyButton"></copy-button>
           <move-button v-show="showMoveButton"></move-button>
           <delete-button v-show="showDeleteButton"></delete-button>
         </div>
 
-        <switch-button v-show="showSwitchButton"></switch-button>
-        <download-button v-show="showCommonButton"></download-button>
+        <switch-button v-show="isListing"></switch-button>
+        <download-button v-show="isFiles"></download-button>
         <upload-button v-show="showUpload"></upload-button>
-        <info-button v-show="showCommonButton"></info-button>
+        <info-button v-show="isFiles"></info-button>
 
-        <button v-show="showSelectButton" @click="openSelect" :aria-label="$t('buttons.selectMultiple')" :title="$t('buttons.selectMultiple')" class="action">
+        <button v-show="isListing" @click="openSelect" :aria-label="$t('buttons.selectMultiple')" :title="$t('buttons.selectMultiple')" class="action">
           <i class="material-icons">check_circle</i>
           <span>{{ $t('buttons.select') }}</span>
         </button>
@@ -71,7 +71,7 @@ import * as api from '@/utils/api'
 import buttons from '@/utils/buttons'
 
 export default {
-  name: 'main',
+  name: 'header-layout',
   components: {
     Search,
     InfoButton,
@@ -102,7 +102,10 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'selectedCount'
+      'selectedCount',
+      'isFiles',
+      'isEditor',
+      'isListing'
     ]),
     ...mapState([
       'req',
@@ -114,75 +117,39 @@ export default {
     isMobile () {
       return this.width <= 736
     },
-    isListing () {
-      return this.req.kind === 'listing'
-    },
-    showSelectButton () {
-      return this.req.kind === 'listing' && !this.loading && this.$route.name === 'Files'
-    },
-    showSaveButton () {
-      return (this.req.kind === 'editor' && !this.loading)
-    },
-    showPublishButton () {
-      return (this.req.kind === 'editor' && !this.loading && this.user.allowPublish)
-    },
-    showSwitchButton () {
-      return this.req.kind === 'listing' && this.$route.name === 'Files' && !this.loading
-    },
-    showCommonButton () {
-      return !(this.$route.name !== 'Files' || this.loading)
-    },
     showUpload () {
-      if (this.$route.name !== 'Files' || this.loading) return false
-
-      if (this.req.kind === 'editor') return false
-      return this.user.allowNew
+      return this.isListing && this.user.perm.create
     },
     showDeleteButton () {
-      if (this.$route.name !== 'Files' || this.loading) return false
-
-      if (this.req.kind === 'listing') {
-        if (this.selectedCount === 0) {
-          return false
-        }
-
-        return this.user.allowEdit
-      }
-
-      return this.user.allowEdit
+      return this.isFiles && (this.isListing
+        ? (this.selectedCount !== 0 && this.user.perm.delete)
+        : this.user.perm.delete)
     },
     showRenameButton () {
-      if (this.$route.name !== 'Files' || this.loading) return false
-
-      if (this.req.kind === 'listing') {
-        if (this.selectedCount === 1) {
-          return this.user.allowEdit
-        }
-
-        return false
-      }
-
-      return this.user.allowEdit
+      return this.isFiles && (this.isListing
+        ? (this.selectedCount === 1 && this.user.perm.rename)
+        : this.user.perm.rename)
+    },
+    showShareButton () {
+      return this.isFiles && (this.isListing
+        ? (this.selectedCount === 1 && this.user.perm.share)
+        : this.user.perm.share)
     },
     showMoveButton () {
-      if (this.$route.name !== 'Files' || this.loading) return false
-
-      if (this.req.kind !== 'listing') {
-        return false
-      }
-
-      if (this.selectedCount > 0) {
-        return this.user.allowEdit
-      }
-
-      return false
+      return this.isFiles && (this.isListing
+        ? (this.selectedCount > 0 && this.user.perm.rename)
+        : this.user.perm.rename)
+    },
+    showCopyButton () {
+      return this.isFiles && (this.isListing
+        ? (this.selectedCount > 0 && this.user.perm.create)
+        : this.user.perm.create)
     },
     showMore () {
-      if (this.$route.name !== 'Files' || this.loading) return false
-      return (this.$store.state.show === 'more')
+      return this.isFiles && this.$store.state.show === 'more'
     },
     showOverlay () {
-      return (this.$store.state.show === 'more')
+      return this.showMore
     }
   },
   methods: {

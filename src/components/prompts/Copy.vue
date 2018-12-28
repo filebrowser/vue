@@ -26,7 +26,7 @@
 <script>
 import { mapState } from 'vuex'
 import FileList from './FileList'
-import * as api from '@/utils/api'
+import { files as api } from '@/api'
 import buttons from '@/utils/buttons'
 
 export default {
@@ -40,7 +40,7 @@ export default {
   },
   computed: mapState(['req', 'selected']),
   methods: {
-    copy: function (event) {
+    copy: async function (event) {
       event.preventDefault()
       buttons.loading('copy')
       let items = []
@@ -53,16 +53,14 @@ export default {
         })
       }
 
-      // Execute the promises.
-      api.copy(items)
-        .then(() => {
-          buttons.success('copy')
-          this.$router.push({ path: this.dest })
-        })
-        .catch(error => {
-          buttons.done('copy')
-          this.$showError(error)
-        })
+      try {
+        await api.copy(items)
+        buttons.success('copy')
+        this.$router.push({ path: this.dest })
+      } catch (e) {
+        buttons.done('copy')
+        this.$showError(e)
+      }
     }
   }
 }
