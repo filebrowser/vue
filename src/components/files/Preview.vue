@@ -44,6 +44,7 @@
 <script>
 import { mapState } from 'vuex'
 import url from '@/utils/url'
+import { baseURL } from '@/utils/constants'
 import { files as api } from '@/api'
 import InfoButton from '@/components/buttons/Info'
 import DeleteButton from '@/components/buttons/Delete'
@@ -67,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['req', 'user', 'oldReq', 'baseURL', 'jwt']),
+    ...mapState(['req', 'user', 'oldReq', 'jwt']),
     hasPrevious () {
       return (this.previousLink !== '')
     },
@@ -75,7 +76,7 @@ export default {
       return (this.nextLink !== '')
     },
     download () {
-      return `${this.baseURL}/api/raw${this.req.path}?auth=${this.jwt}`
+      return `${baseURL}/api/raw${this.req.path}?auth=${this.jwt}`
     },
     raw () {
       return `${this.download}&inline=true`
@@ -85,7 +86,7 @@ export default {
     window.addEventListener('keyup', this.key)
 
     if (this.req.subtitles) {
-      this.subtitles = this.req.subtitles.map(sub => `${this.baseURL}/api/raw${sub}?auth=${this.jwt}&inline=true`)
+      this.subtitles = this.req.subtitles.map(sub => `${baseURL}/api/raw${sub}?auth=${this.jwt}&inline=true`)
     }
 
     try {

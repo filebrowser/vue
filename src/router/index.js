@@ -13,11 +13,12 @@ import Error404 from '@/views/errors/404'
 import Error500 from '@/views/errors/500'
 import auth from '@/utils/auth'
 import store from '@/store'
+import { baseURL } from '@/utils/constants'
 
 Vue.use(Router)
 
 const router = new Router({
-  base: document.querySelector('meta[name="base"]').getAttribute('content'),
+  base: baseURL,
   mode: 'history',
   routes: [
     {
@@ -130,7 +131,7 @@ router.beforeEach((to, from, next) => {
 
       return
     }
-    
+
     if (to.matched.some(record => record.meta.requiresAdmin)) {
       if (!store.state.user.perm.admin) {
         next({ path: '/403' })

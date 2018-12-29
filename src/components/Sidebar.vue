@@ -30,7 +30,11 @@
     </div>
 
     <p class="credits">
-      <span><a rel="noopener noreferrer" href="https://github.com/filebrowser/filebrowser">File Browser</a> v{{ version }}</span>
+      <span>
+        <span v-if="disableExternal">File Browser</span>
+        <a v-else rel="noopener noreferrer" target="_blank" href="https://github.com/filebrowser/filebrowser">File Browser</a>
+        <span> v{{ version }}</span>
+      </span>
       <span><a @click="help">{{ $t('sidebar.help') }}</a></span>
     </p>
   </nav>
@@ -39,14 +43,18 @@
 <script>
 import {mapState} from 'vuex'
 import auth from '@/utils/auth'
+import { version } from '@/utils/constants'
+import { disableExternal } from '@/utils/constants'
 
 export default {
   name: 'sidebar',
   computed: {
-    ...mapState(['user', 'version']),
+    ...mapState(['user']),
     active () {
       return this.$store.state.show === 'sidebar'
-    }
+    },
+    version: () => version,
+    disableExternal: () => disableExternal
   },
   methods: {
     help () {

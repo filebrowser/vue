@@ -5,6 +5,7 @@ import router from './router'
 import i18n from './i18n'
 import Noty from 'noty'
 import { sync } from 'vuex-router-sync'
+import { disableExternal } from '@/utils/constants'
 
 Vue.config.productionTip = true
 
@@ -27,18 +28,23 @@ Vue.prototype.$showSuccess = function (message) {
 }
 
 Vue.prototype.$showError = function (error) {
+  let btns = [
+    Noty.button(i18n.t('buttons.close'), '', function () {
+      n.close()
+    })
+  ]
+
+  if (!disableExternal) {
+    btns.unshift(Noty.button(i18n.t('buttons.reportIssue'), '', function () {
+      window.open('https://github.com/filebrowser/filebrowser/issues/new/choose')
+    }))
+  }
+
   let n = new Noty(Object.assign({}, notyDefault, {
     text: error.message || error,
     type: 'error',
     timeout: null,
-    buttons: [
-      Noty.button(i18n.t('buttons.reportIssue'), '', function () {
-        window.open('https://github.com/filebrowser/filebrowser/issues/new/choose')
-      }),
-      Noty.button(i18n.t('buttons.close'), '', function () {
-        n.close()
-      })
-    ]
+    buttons: btns
   }))
 
   n.show()

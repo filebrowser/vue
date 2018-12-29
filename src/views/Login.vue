@@ -1,15 +1,15 @@
 <template>
-  <div id="login" :class="{ recaptcha: recaptcha.length > 0 }">
+  <div id="login" :class="{ recaptcha: recaptcha }">
     <form @submit="submit">
       <img src="../assets/logo.svg" alt="File Browser">
-      <h1>File Browser</h1>
+      <h1>{{ name }}</h1>
       <div v-if="error !== ''" class="wrong">{{ error }}</div>
 
       <input type="text" v-model="username" :placeholder="$t('login.username')">
       <input type="password" v-model="password" :placeholder="$t('login.password')">
       <input v-if="createMode" type="password" v-model="passwordConfirm" :placeholder="$t('login.passwordConfirm')" />
 
-      <div v-if="recaptcha.length" id="recaptcha"></div>
+      <div v-if="recaptcha" id="recaptcha"></div>
       <input type="submit" :value="createMode ? $t('login.signup') : $t('login.submit')">
 
       <p @click="toggleMode" v-if="signup">{{ createMode ? $t('login.loginInstead') : $t('login.createAnAccount') }}</p>
@@ -20,17 +20,22 @@
 <script>
 import auth from '@/utils/auth'
 import { mapState } from 'vuex'
+import { name, recaptcha, recaptchaKey, signup } from '@/utils/constants'
 
 export default {
   name: 'login',
   props: ['dependencies'],
-  computed: mapState([ 'recaptcha', 'signup' ]),
+  computed: {
+    signup: () => signup,
+    name: () => name
+  },
   data: function () {
     return {
       createMode: false,
       error: '',
       username: '',
       password: '',
+      recaptcha: recaptcha,
       passwordConfirm: ''
     }
   },
@@ -44,10 +49,10 @@ export default {
   },
   methods: {
     setup () {
-      if (this.recaptcha.length === 0) return
+      if (!recaptcha) return
 
       window.grecaptcha.render('recaptcha', {
-        sitekey: this.recaptcha
+        sitekey: recaptchaKey
       })
     },
     toggleMode () {
@@ -63,7 +68,7 @@ export default {
       }
 
       let captcha = ''
-      if (this.recaptcha.length > 0) {
+      if (recaptcha) {
         captcha = window.grecaptcha.getResponse()
 
         if (captcha === '') {

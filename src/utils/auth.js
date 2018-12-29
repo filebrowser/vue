@@ -1,6 +1,7 @@
 import store from '@/store'
 import router from '@/router'
 import { Base64 } from 'js-base64'
+import { baseURL } from '@/utils/constants'
 
 function parseToken (token) {
   const parts = token.split('.')
@@ -39,7 +40,7 @@ function loggedIn () {
 async function login (username, password, recaptcha) {
   const data = { username, password, recaptcha }
 
-  const res = await fetch(`${store.state.baseURL}/api/login`, {
+  const res = await fetch(`${baseURL}/api/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -59,7 +60,7 @@ async function login (username, password, recaptcha) {
 async function signup (username, password) {
   const data = { username, password }
 
-  const res = await fetch(`${store.state.baseURL}/api/signup`, {
+  const res = await fetch(`${baseURL}/api/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

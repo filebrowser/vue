@@ -60,6 +60,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import { share as api } from '@/api'
+import { baseURL } from '@/utils/constants'
 import moment from 'moment'
 import Clipboard from 'clipboard'
 
@@ -75,7 +76,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([ 'baseURL', 'req', 'selected', 'selectedCount' ]),
+    ...mapState([ 'req', 'selected', 'selectedCount' ]),
     ...mapGetters([ 'isListing' ]),
     url () {
       if (!this.isListing) {
@@ -151,7 +152,7 @@ export default {
       return moment(time).fromNow()
     },
     buildLink (hash) {
-      return `${window.location.origin}${this.baseURL}/share/${hash}`
+      return `${window.location.origin}${baseURL}/share/${hash}`
     },
     sort () {
       this.links = this.links.sort((a, b) => {

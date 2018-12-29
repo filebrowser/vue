@@ -1,4 +1,5 @@
 import { fetchURL, removePrefix } from './utils'
+import { baseURL } from '@/utils/constants'
 import store from '@/store'
 
 export async function fetch (url) {
@@ -57,7 +58,7 @@ export function put (url, content = '') {
 }
 
 export function download (format, ...files) {
-  let url = `${store.state.baseURL}/api/raw`
+  let url = `${baseURL}/api/raw`
 
   if (files.length === 1) {
     url += removePrefix(files[0]) + '?'
@@ -87,7 +88,7 @@ export function post (url, content = '', overwrite = false, onupload) {
 
   return new Promise((resolve, reject) => {
     let request = new XMLHttpRequest()
-    request.open('POST', `${store.state.baseURL}/api/resources${url}?override=${overwrite}`, true)
+    request.open('POST', `${baseURL}/api/resources${url}?override=${overwrite}`, true)
     request.setRequestHeader('Authorization', `Bearer ${store.state.jwt}`)
 
     if (typeof onupload === 'function') {

@@ -1,4 +1,5 @@
 import store from '@/store'
+import { baseURL } from '@/utils/constants'
 
 export function fetchURL (url, opts) {
   opts = opts || {}
@@ -6,7 +7,7 @@ export function fetchURL (url, opts) {
 
   let { headers, ...rest } = opts
 
-  return fetch(`${store.state.baseURL}${url}`, {
+  return fetch(`${baseURL}${url}`, {
     headers: {
       'Authorization': `Bearer ${store.state.jwt}`,
       ...headers

@@ -87,6 +87,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import { baseURL } from '@/utils/constants'
 import Item from './ListingItem'
 import css from '@/utils/css'
 import { files as api } from '@/api'
@@ -404,7 +405,7 @@ export default {
         }
       }
 
-      let path = this.$store.state.baseURL
+      let path = baseURL
       if (path === '') path = '/'
       document.cookie = `sort=${sort}; max-age=31536000; path=${path}`
       document.cookie = `order=${order}; max-age=31536000; path=${path}`

@@ -4,17 +4,17 @@
 
 <script>
 import { mapState } from 'vuex'
+import { recaptcha } from '@/utils/constants'
 
 export default {
   name: 'app',
-  computed: mapState(['recaptcha']),
   data () {
     return {
       loaded: false
     }
   },
   mounted () {
-    if (this.recaptcha.length === 0) {
+    if (!recaptcha) {
       this.unload()
       return
     }

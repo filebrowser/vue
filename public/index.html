@@ -5,17 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <!-- Inject some variables -->
-  <meta name="base" content="[{[ .BaseURL ]}]">
-  <meta name="signup" content="[{[ .Signup ]}]">
-  <meta name="version" content="{{ .Version }}">
-  <meta name="recaptcha" content="[{[ .ReCaptchaKey ]}]">
+  [{[ if .ReCaptcha -]}]
+    <script src="[{[ .ReCaptchaHost ]}]/recaptcha/api.js?render=explicit"></script>
+  [{[ end ]}]
 
-  {{ if .ReCaptcha -}}
-    <script src="{{ .ReCaptchaHost }}/recaptcha/api.js?render=explicit"></script>
-  {{ end }}
-
-  <title>File Browser</title>
+  <title>[{[ if .Name -]}][{[ .Name ]}][{[ else ]}]File Browser[{[ end ]}]</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="/[{[ .StaticURL ]}]/img/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/[{[ .StaticURL ]}]/img/icons/favicon-16x16.png">
@@ -32,6 +26,9 @@
   <!-- Add to home screen for Windows -->
   <meta name="msapplication-TileImage" content="/[{[ .StaticURL ]}]/img/icons/msapplication-icon-144x144.png">
   <meta name="msapplication-TileColor" content="#2979ff">
+
+  <!-- Inject Some Variables -->
+  <script>window.FileBrowser = JSON.parse(`[{[ .Json ]}]`)</script>
 
   <style>
   #loading {
