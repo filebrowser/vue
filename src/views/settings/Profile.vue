@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { users as api } from '@/api'
 import Languages from '@/components/Languages'
 
@@ -67,6 +67,7 @@ export default {
     this.locale = this.user.locale
   },
   methods: {
+    ...mapMutations([ 'updateUser' ]),
     async updatePassword (event) {
       event.preventDefault()
 
@@ -74,13 +75,10 @@ export default {
         return
       }
 
-      let user = {
-        id: this.user.id,
-        password: this.password
-      }
-
       try {
-        await api.update(user, 'password')
+        const data = { password: this.password }
+        await api.update(data, ['password'])
+        this.updateUser(data)
         this.$showSuccess(this.$t('settings.passwordUpdated'))
       } catch (e) {
         this.$showError(e)
@@ -89,12 +87,10 @@ export default {
     async updateSettings (event) {
       event.preventDefault()
 
-      let user = { ...this.user }
-      user.locale = this.locale
-
       try {
-        await api.update(user, 'partial')
-        this.$store.commit('setUser', user)
+        const data = { locale: this.locale }
+        await api.update(data, ['locale'])
+        this.updateUser(data)
         this.$showSuccess(this.$t('settings.settingsUpdated'))
       } catch (e) {
         this.$showError(e)

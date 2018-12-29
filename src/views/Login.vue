@@ -19,7 +19,6 @@
 
 <script>
 import auth from '@/utils/auth'
-import { mapState } from 'vuex'
 import { name, logoURL, recaptcha, recaptchaKey, signup } from '@/utils/constants'
 
 export default {

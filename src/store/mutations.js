@@ -55,6 +55,11 @@ const mutations = {
     if (typeof value !== 'object') return
 
     for (let field in value) {
+      if (field === 'locale') {
+        moment.locale(value[field])
+        i18n.default.locale = value[field]
+      }
+
       state.user[field] = value[field]
     }
   },

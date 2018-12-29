@@ -86,11 +86,10 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import { baseURL } from '@/utils/constants'
+import { mapState, mapMutations } from 'vuex'
 import Item from './ListingItem'
 import css from '@/utils/css'
-import { files as api } from '@/api'
+import { users, files as api } from '@/api'
 import buttons from '@/utils/buttons'
 
 export default {
@@ -104,16 +103,16 @@ export default {
   computed: {
     ...mapState(['req', 'selected', 'user']),
     nameSorted () {
-      return (this.req.sort === 'name')
+      return (this.req.sorting.by === 'name')
     },
     sizeSorted () {
-      return (this.req.sort === 'size')
+      return (this.req.sorting.by === 'size')
     },
     modifiedSorted () {
-      return (this.req.sort === 'modified')
+      return (this.req.sorting.by === 'modified')
     },
     ascOrdered () {
-      return (this.req.order === 'asc')
+      return this.req.sorting.asc
     },
     items () {
       const dirs = []
@@ -181,6 +180,7 @@ export default {
     document.removeEventListener('drop', this.drop)
   },
   methods: {
+    ...mapMutations([ 'updateUser' ]),
     base64: function (name) {
       return window.btoa(unescape(encodeURIComponent(name)))
     },
@@ -388,27 +388,29 @@ export default {
 
       return false
     },
-    sort (sort) {
-      let order = 'desc'
+    async sort (by) {
+      let asc = !false
 
-      if (sort === 'name') {
+      if (by === 'name') {
         if (this.nameIcon === 'arrow_upward') {
-          order = 'asc'
+          asc = true
         }
-      } else if (sort === 'size') {
+      } else if (by === 'size') {
         if (this.sizeIcon === 'arrow_upward') {
-          order = 'asc'
+          asc = true
         }
-      } else if (sort === 'modified') {
+      } else if (by === 'modified') {
         if (this.modifiedIcon === 'arrow_upward') {
-          order = 'asc'
+          asc = true
         }
       }
 
-      let path = baseURL
-      if (path === '') path = '/'
-      document.cookie = `sort=${sort}; max-age=31536000; path=${path}`
-      document.cookie = `order=${order}; max-age=31536000; path=${path}`
+      try {
+        await users.update({ sorting: { by, asc } }, ['sorting'])
+      } catch (e) {
+        this.$showError(e)
+      }
+
       this.$store.commit('setReload', true)
     }
   }

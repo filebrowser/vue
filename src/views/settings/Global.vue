@@ -25,6 +25,21 @@
       </div>
     </form>
 
+    <form class="card" @submit.prevent="saveUserDefaults">
+      <div class="card-title">
+        <h2>{{ $t('settings.userDefaults') }}</h2>
+      </div>
+
+      <div class="card-content">
+        <p class="small">{{ $t('settings.userDefaultsHelp') }}</p>
+  
+      </div>
+
+      <div class="card-action">
+        <input class="flat" type="submit" :value="$t('buttons.update')">
+      </div>
+    </form>
+
   </div>
 </template>
 

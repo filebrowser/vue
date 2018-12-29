@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { recaptcha } from '@/utils/constants'
 
 export default {

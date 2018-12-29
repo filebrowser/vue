@@ -22,6 +22,7 @@ function parseToken (token) {
 }
 
 function loggedIn () {
+  // TODO: reload token
   try {
     if (store.state.jwt) {
       parseToken(store.state.jwt)
