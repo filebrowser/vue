@@ -389,7 +389,7 @@ export default {
       return false
     },
     async sort (by) {
-      let asc = !false
+      let asc = false
 
       if (by === 'name') {
         if (this.nameIcon === 'arrow_upward') {
