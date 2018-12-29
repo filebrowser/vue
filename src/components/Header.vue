@@ -4,7 +4,7 @@
       <button @click="openSidebar" :aria-label="$t('buttons.toggleSidebar')" :title="$t('buttons.toggleSidebar')" class="action">
         <i class="material-icons">menu</i>
       </button>
-      <img src="../assets/logo.svg" alt="File Browser">
+      <img :src="logoURL" alt="File Browser">
       <search></search>
     </div>
     <div>
@@ -67,6 +67,7 @@ import MoveButton from './buttons/Move'
 import CopyButton from './buttons/Copy'
 import ShareButton from './buttons/Share'
 import {mapGetters, mapState} from 'vuex'
+import { logoURL } from '@/utils/constants'
 import * as api from '@/api'
 import buttons from '@/utils/buttons'
 
@@ -114,6 +115,7 @@ export default {
       'reload',
       'multiple'
     ]),
+    logoURL: () => logoURL,
     isMobile () {
       return this.width <= 736
     },

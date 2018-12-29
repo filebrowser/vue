@@ -1,7 +1,7 @@
 <template>
   <div id="login" :class="{ recaptcha: recaptcha }">
     <form @submit="submit">
-      <img src="../assets/logo.svg" alt="File Browser">
+      <img :src="logoURL" alt="File Browser">
       <h1>{{ name }}</h1>
       <div v-if="error !== ''" class="wrong">{{ error }}</div>
 
@@ -20,14 +20,15 @@
 <script>
 import auth from '@/utils/auth'
 import { mapState } from 'vuex'
-import { name, recaptcha, recaptchaKey, signup } from '@/utils/constants'
+import { name, logoURL, recaptcha, recaptchaKey, signup } from '@/utils/constants'
 
 export default {
   name: 'login',
   props: ['dependencies'],
   computed: {
     signup: () => signup,
-    name: () => name
+    name: () => name,
+    logoURL: () => logoURL
   },
   data: function () {
     return {
