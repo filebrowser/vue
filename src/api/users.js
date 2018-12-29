@@ -23,6 +23,10 @@ export async function get (id) {
   }
 }
 
+export async function create (user) {
+  console.log(user)
+}
+
 /*
 
 export function newUser (user) {
@@ -48,7 +52,14 @@ export function newUser (user) {
       data: user
     }))
   })
+} */
+
+export async function update (user, which) {
+  console.log(user, which)
 }
+
+
+/*
 
 export function updateUser (user, which) {
   return new Promise((resolve, reject) => {
@@ -73,7 +84,14 @@ export function updateUser (user, which) {
       data: user
     }))
   })
+} */
+
+
+export function remove (id) {
+  console.log(id)
 }
+
+/*
 
 export function deleteUser (id) {
   return new Promise((resolve, reject) => {

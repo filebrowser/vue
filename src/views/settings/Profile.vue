@@ -34,7 +34,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { updateUser } from '@/utils/api'
+import { users as api } from '@/api'
 import Languages from '@/components/Languages'
 
 export default {
@@ -67,36 +67,38 @@ export default {
     this.locale = this.user.locale
   },
   methods: {
-    updatePassword (event) {
+    async updatePassword (event) {
       event.preventDefault()
 
-      if (this.password !== this.passwordConf) {
+      if (this.password !== this.passwordConf || this.password === '') {
         return
       }
 
       let user = {
-        ID: this.$store.state.user.ID,
+        id: this.user.id,
         password: this.password
       }
 
-      updateUser(user, 'password').then(() => {
+      try {
+        await api.update(user, 'password')
         this.$showSuccess(this.$t('settings.passwordUpdated'))
-      }).catch(e => {
+      } catch (e) {
         this.$showError(e)
-      })
+      }
     },
-    updateSettings (event) {
+    async updateSettings (event) {
       event.preventDefault()
 
-      let user = {...this.$store.state.user}
+      let user = { ...this.user }
       user.locale = this.locale
 
-      updateUser(user, 'partial').then(() => {
+      try {
+        await api.update(user, 'partial')
         this.$store.commit('setUser', user)
         this.$showSuccess(this.$t('settings.settingsUpdated'))
-      }).catch(e => {
+      } catch (e) {
         this.$showError(e)
-      })
+      }
     }
   }
 }
