@@ -24,6 +24,7 @@ export default {
       this.closeHovers()
 
       const data = {
+        id: this.user.id,
         viewMode: (this.icon === 'view_list') ? 'list' : 'mosaic'
       }
 

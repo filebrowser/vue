@@ -406,7 +406,7 @@ export default {
       }
 
       try {
-        await users.update({ sorting: { by, asc } }, ['sorting'])
+        await users.update({ id: this.user.id, sorting: { by, asc } }, ['sorting'])
       } catch (e) {
         this.$showError(e)
       }

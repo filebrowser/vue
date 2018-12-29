@@ -76,7 +76,7 @@ export default {
       }
 
       try {
-        const data = { password: this.password }
+        const data = { id: this.user.id, password: this.password }
         await api.update(data, ['password'])
         this.updateUser(data)
         this.$showSuccess(this.$t('settings.passwordUpdated'))
@@ -88,7 +88,7 @@ export default {
       event.preventDefault()
 
       try {
-        const data = { locale: this.locale }
+        const data = { id: this.user.id, locale: this.locale }
         await api.update(data, ['locale'])
         this.updateUser(data)
         this.$showSuccess(this.$t('settings.settingsUpdated'))
