@@ -26,8 +26,8 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
-      beforeEnter: function (to, from, next) {
-        if (auth.loggedIn()) {
+      beforeEnter: async function (to, from, next) {
+        if (await auth.loggedIn()) {
           return next({ path: '/files' })
         }
 
@@ -123,13 +123,13 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   document.title = to.name
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    if (!auth.loggedIn()) {
+    if (!await auth.loggedIn()) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }

@@ -58,7 +58,7 @@
 <script>
 import { mapState } from 'vuex'
 import url from '@/utils/url'
-import * as api from '@/utils/api'
+import { ws as api } from '@/api'
 
 var boxes = {
   image: { label: 'images', icon: 'insert_photo' },

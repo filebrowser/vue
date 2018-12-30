@@ -23,7 +23,7 @@
         <span>{{ $t('sidebar.settings') }}</span>
       </router-link>
 
-      <button @click="logout" class="action" id="logout" :aria-label="$t('sidebar.logout')" :title="$t('sidebar.logout')">
+      <button v-if="!noAuth" @click="logout" class="action" id="logout" :aria-label="$t('sidebar.logout')" :title="$t('sidebar.logout')">
         <i class="material-icons">exit_to_app</i>
         <span>{{ $t('sidebar.logout') }}</span>
       </button>
@@ -43,8 +43,7 @@
 <script>
 import {mapState} from 'vuex'
 import auth from '@/utils/auth'
-import { version } from '@/utils/constants'
-import { disableExternal } from '@/utils/constants'
+import { version, disableExternal, noAuth } from '@/utils/constants'
 
 export default {
   name: 'sidebar',
@@ -54,7 +53,8 @@ export default {
       return this.$store.state.show === 'sidebar'
     },
     version: () => version,
-    disableExternal: () => disableExternal
+    disableExternal: () => disableExternal,
+    noAuth: () => noAuth
   },
   methods: {
     help () {

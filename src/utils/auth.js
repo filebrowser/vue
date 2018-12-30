@@ -1,7 +1,7 @@
 import store from '@/store'
 import router from '@/router'
 import { Base64 } from 'js-base64'
-import { baseURL } from '@/utils/constants'
+import { baseURL, noAuth } from '@/utils/constants'
 
 function parseToken (token) {
   const parts = token.split('.')
@@ -21,7 +21,12 @@ function parseToken (token) {
   store.commit('setUser', data.user)
 }
 
-function loggedIn () {
+async function loggedIn () {
+  if (noAuth) {
+    await login('', '', '')
+    return true
+  }
+
   // TODO: reload token
   try {
     if (store.state.jwt) {

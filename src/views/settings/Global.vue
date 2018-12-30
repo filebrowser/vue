@@ -96,7 +96,6 @@ export default {
 
       this.originalSettings = original
       this.settings = settings
-      console.log(settings)
     } catch (e) {
       this.$showError(e)
     }

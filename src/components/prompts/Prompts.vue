@@ -29,7 +29,6 @@ import Replace from './Replace'
 import Share from './Share'
 import { mapState } from 'vuex'
 import buttons from '@/utils/buttons'
-import * as api from '@/utils/api'
 
 export default {
   name: 'prompts',
@@ -49,7 +48,6 @@ export default {
   data: function () {
     return {
       pluginData: {
-        api,
         buttons,
         'store': this.$store,
         'router': this.$router
