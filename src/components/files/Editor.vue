@@ -1,13 +1,15 @@
 <template>
-  <form id="editor" :class="req.language">
-    <textarea v-model="content" placeholder="add multiple lines"></textarea>
-  </form>
+  <form id="editor"></form>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { files as api } from '@/api'
 import buttons from '@/utils/buttons'
+
+import ace from 'ace-builds/src-min-noconflict/ace.js'
+import modelist from 'ace-builds/src-min-noconflict/ext-modelist.js'
+import 'ace-builds/webpack-resolver'
 
 export default {
   name: 'editor',
@@ -16,7 +18,8 @@ export default {
   },
   data: function () {
     return {
-      content: null
+      content: null,
+      editor: null
     }
   },
   created () {
@@ -32,7 +35,14 @@ export default {
       this.req.content = ''
     }
 
-    this.content = this.req.content
+    this.editor = ace.edit('editor', {
+      maxLines: Infinity,
+      minLines: 20,
+      value: this.req.content,
+      showPrintMargin: false,
+      theme: 'ace/theme/chrome',
+      mode: modelist.getModeForPath(this.req.name).mode
+    })
   },
   methods: {
     keyEvent (event) {
@@ -52,7 +62,7 @@ export default {
       buttons.loading('save')
 
       try {
-        api.put(this.$route.path, this.content)
+        api.put(this.$route.path, this.editor.getValue())
         buttons.success(button)
       } catch (e) {
         buttons.done(button)

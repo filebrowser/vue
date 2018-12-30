@@ -13,7 +13,7 @@ export default {
   computed: {
     raw: {
       get () {
-        return this.commands ? this.commands.join(' ') : ''
+        return this.commands.join(' ')
       },
       set (value) {
         this.$emit('update:commands', value.split(' '))

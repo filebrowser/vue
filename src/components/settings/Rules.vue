@@ -41,7 +41,7 @@ export default {
       event.preventDefault()
 
       this.$emit('update:rules', [
-        ...(this.rules || []),
+        ...this.rules,
         {
           allow: true,
           path: '',
