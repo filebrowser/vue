@@ -139,7 +139,7 @@
     "ruleExample1": "Verhindert den Zugang zu dot Dateien (dot Files, wie .git, .gitignore) in allen Ordnern\n",
     "ruleExample2": "blockiert den Zugang auf Dateien mit dem Namen Caddyfile in der Wurzel/Basis des scopes.",
     "rules": "Regeln",
-    "rulesHelp1": "Hier können Sie erlaubte und verbotene Aktionen für einen einzelnen Benutzer festlegen. Bockierte Dateien werden nicht im Listing angezeigt und sind nicht erreichbar für den Nutzer. Wir unterstützen reguläre Ausdrücke (Regex) und Pfade die relativ zum Benutzerordner sind. \n",
+    "rulesHelp": "Hier können Sie erlaubte und verbotene Aktionen für einen einzelnen Benutzer festlegen. Bockierte Dateien werden nicht im Listing angezeigt und sind nicht erreichbar für den Nutzer. Wir unterstützen reguläre Ausdrücke (Regex) und Pfade die relativ zum Benutzerordner sind. \n",
     "rulesHelp2": "Jede Regel hat seine eigene Zeile und beginnt mit dem Schlüsselwort {0} oder {1}. Wenn ein regulärer Ausdruck verwendet wird folgt {2} mit dem Ausdruck oder dem Pfad. \n",
     "scope": "Scope",
     "settingsUpdated": "Einstellungen aktualisiert!",

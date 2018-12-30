@@ -7,7 +7,7 @@
 
       <div class="card-content">
         <h3>{{ $t('settings.language') }}</h3>
-        <p><languages id="locale" :selected.sync="locale"></languages></p>
+        <p><languages id="locale" :locale.sync="locale"></languages></p>
       </div>
 
       <div class="card-action">
@@ -35,7 +35,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { users as api } from '@/api'
-import Languages from '@/components/Languages'
+import Languages from '@/components/settings/Languages'
 
 export default {
   name: 'settings',

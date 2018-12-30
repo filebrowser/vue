@@ -139,7 +139,7 @@
     "ruleExample1": "Impedisci l'accesso a qualsiasi file avente come prefisso un punto\n (ad esempio .git, .gitignore) presente in ogni cartella.\n",
     "ruleExample2": "blocca l'accesso al file denominato Caddyfile nella radice del campo di applicazione.",
     "rules": "Regole",
-    "rulesHelp1": "Qui è possibile definire una serie di regole e permessi per questo specifico utente. I file bloccati non appariranno negli elenchi e non saranno accessibili dagli utenti. all'utente. Sia regex che i percorsi relativi all'ambito di applicazione degli utenti sono supportati.\n",
+    "rulesHelp": "Qui è possibile definire una serie di regole e permessi per questo specifico utente. I file bloccati non appariranno negli elenchi e non saranno accessibili dagli utenti. all'utente. Sia regex che i percorsi relativi all'ambito di applicazione degli utenti sono supportati.\n",
     "rulesHelp2": "Ogni regola deve essere inserita in una riga diversa e deve iniziare  con la parola chiave {0} or {1}. Quindi si deve scrivere {2} se si utilizza un'espressione regolare e quindi l'espressione o il percorso.\n",
     "scope": "Scopo",
     "settingsUpdated": "Impostazioni aggiornate!",

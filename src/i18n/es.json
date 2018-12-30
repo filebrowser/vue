@@ -139,7 +139,7 @@
     "ruleExample1": "previene el acceso a una extensión de archivo (Como .git) en cada carpeta.\n",
     "ruleExample2": "bloquea el acceso al archivo llamado Caddyfile en la carpeta raíz.",
     "rules": "Reglas",
-    "rulesHelp1": "Aquí puedes definir un conjunto de reglas de permisos para este usuario específico. Los archivos bloqueados no se mostrarán en las listas y no serán accesibles por el usuario. Puedes utilizar regex y rutas relativas a la raíz del usuario.\n",
+    "rulesHelp": "Aquí puedes definir un conjunto de reglas de permisos para este usuario específico. Los archivos bloqueados no se mostrarán en las listas y no serán accesibles por el usuario. Puedes utilizar regex y rutas relativas a la raíz del usuario.\n",
     "rulesHelp2": "Cada regla va en una línea diferente, y debe comenzar con la palabra clave {0} or {1}. Entonces, debes escribir {2} si estás usando una expresión regular (REGEX) y luego la expresión o la ruta.\n",
     "scope": "Raíz",
     "settingsUpdated": "¡Ajustes actualizados!",

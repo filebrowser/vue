@@ -1,5 +1,5 @@
 <template>
-  <select v-on:change="change" :value="selected">
+  <select v-on:change="change" :value="locale">
     <option value="ar">{{ $t('languages.ar') }}</option>
     <option value="de">{{ $t('languages.de') }}</option>
     <option value="en">{{ $t('languages.en') }}</option>
@@ -20,10 +20,10 @@
 <script>
 export default {
   name: 'languages',
-  props: [ 'selected' ],
+  props: [ 'locale' ],
   methods: {
     change (event) {
-      this.$emit('update:selected', event.target.value)
+      this.$emit('update:locale', event.target.value)
     }
   }
 }

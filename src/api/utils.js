@@ -16,6 +16,16 @@ export function fetchURL (url, opts) {
   })
 }
 
+export async function fetchJSON (url, opts) {
+  const res = await fetchURL(url, opts)
+
+  if (res.status === 200) {
+    return res.json()
+  } else {
+    throw new Error(res.status)
+  }
+}
+
 export function removePrefix (url) {
   if (url.startsWith('/files')) {
     url = url.slice(6)

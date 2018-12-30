@@ -167,7 +167,7 @@
     "ruleExample1": "previne o acesso a qualquer \"dotfile\" (como .git, .gitignore) em qualquer pasta\n",
     "ruleExample2": "bloqueia o acesso ao arquivo chamado Caddyfile.",
     "rules": "Regras",
-    "rulesHelp1": "Aqui pode definir um conjunto de regras para permitir ou bloquear o acesso do utilizador a determinados arquivos ou pastas. Os arquivos bloqueados não irão aparecer durante a navegação. Suportamos expressões regulares e os caminhos dos arquivos devem ser relativos à base do usuário.\n",
+    "rulesHelp": "Aqui pode definir um conjunto de regras para permitir ou bloquear o acesso do utilizador a determinados arquivos ou pastas. Os arquivos bloqueados não irão aparecer durante a navegação. Suportamos expressões regulares e os caminhos dos arquivos devem ser relativos à base do usuário.\n",
     "rulesHelp2": "Cada regra deve ser colocada numa linha diferente e deve começar com as palavras {0} (permite) ou {1} (bloqueia). Deve escrever, logo de seguida, {2}, caso queira utilizar uma expressão regular. Depois, escreva o caminho do arquivo/pasta ou a expressão regular.\n",
     "scope": "Base",
     "settingsUpdated": "Configurações atualizadas!",

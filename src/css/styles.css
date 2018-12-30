@@ -226,4 +226,36 @@
   }
 }
 
+/* * * * * * * * * * * * * * * *
+ *         SETTINGS RULES      *
+ * * * * * * * * * * * * * * * */
+
+.rules > div {
+  display: flex;
+  align-items: center;
+  margin: .5rem 0;
+}
+
+.rules input[type="checkbox"] {
+  margin-right: .2rem;
+}
+
+.rules input[type="text"] {
+  border: 1px solid#ddd;
+  padding: .2rem;
+}
+
+.rules label {
+  margin-right: .5rem;
+}
+
+.rules button {
+  margin-left: auto;
+}
+
+.rules button.delete {
+  padding: .2rem .5rem;
+  margin-left: .5rem;
+}
+
 @import './mobile.css';

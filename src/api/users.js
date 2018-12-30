@@ -1,23 +1,11 @@
-import { fetchURL } from './utils'
+import { fetchURL, fetchJSON } from './utils'
 
 export async function getAll () {
-  const res = await fetchURL(`/api/users`, {})
-
-  if (res.status === 200) {
-    return await res.json()
-  } else {
-    throw new Error(res.status)
-  }
+  return fetchJSON(`/api/users`, {})
 }
 
 export async function get (id) {
-  const res = await fetchURL(`/api/users/${id}`, {})
-
-  if (res.status === 200) {
-    return res.json()
-  } else {
-    throw new Error(res.status)
-  }
+  return fetchJSON(`/api/users/${id}`, {})
 }
 
 export async function create (user) {
