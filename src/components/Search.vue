@@ -182,11 +182,6 @@ export default {
 
       return this.$t("search.notSupportedCommand")
     }
-    /* 
-    // The command, without the leading symbol ('$') with or without a following space (' ')
-    results () {
-      return this.search.slice(0, this.resultsCount)
-    } */
   },
   mounted() {
     window.addEventListener("keydown", event => {
@@ -240,6 +235,10 @@ export default {
       event.preventDefault()
 
       if (this.isCommand && !this.isValidCommand) {
+        return
+      }
+      
+      if (this.value === '') {
         return
       }
 
