@@ -9,11 +9,11 @@ export async function get (id) {
 }
 
 export async function create (user) {
-  const res = await fetchURL(`/api/users/`, {
+  const res = await fetchURL(`/api/users`, {
     method: 'POST',
     body: JSON.stringify({
       what: 'user',
-      which: ['new'],
+      which: [],
       data: user
     })
   })
