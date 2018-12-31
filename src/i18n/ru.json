@@ -75,7 +75,13 @@
   },
   "login": {
     "password": "Пароль",
+    "passwordConfirm": "Password Confirmation",
     "submit": "Войти",
+    "createAnAccount": "Create an account",
+    "loginInstead": "Already have an account",
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameTaken": "Username already taken",
+    "signup": "Signup",
     "username": "Имя пользователя",
     "wrongCredentials": "Неверные данные"
   },
@@ -140,7 +146,6 @@
     "ruleExample2": "блокирует доступ к файлу с именем Caddyfile в корневой области.",
     "rules": "Права",
     "rulesHelp": "Здесь вы можете определить набор разрешающих и запрещающих правил для этого конкретного пользователь. Блокированные файлы не будут отображаться в списках, и не будут доступны для пользователя. Есть поддержка регулярных выражений и относительных путей.\n",
-    "rulesHelp2": "Каждое правило начинается с новой строки и должно начинаться с ключевого слова {0} или {1}. Затем {2}, если используются регулярное выражение, дальше выражение или путь.\n",
     "scope": "Корень",
     "settingsUpdated": "Настройки применены!",
     "user": "Пользователь",
@@ -151,7 +156,23 @@
     "userManagement": "Управление пользователями",
     "username": "Имя пользователя",
     "users": "Пользователи",
-    "userUpdated": "Пользователь изменен!"
+    "globalRules": "This is a global set of allow and disallow rules. They apply to every user. You can define specific rules on each user's settings to override this ones.",
+    "allowSignup": "Allow users to signup",
+    "insertRegex": "Insert regex expression",
+    "insertPath": "Insert the path",
+    "userUpdated": "Пользователь изменен!",
+    "generalSettings": "General settings",
+    "userDefaults": "User default settings",
+    "defaultUserDescription": "This are the default settings for new users.",
+    "perm": {
+      "create": "Create files and directories",
+      "delete": "Delete files and directories",
+      "download": "Download",
+      "edit": "Edit files",
+      "execute": "Execute commands",
+      "rename": "Rename or move files and directories",
+      "share": "Share files"
+    }
   },
   "sidebar": {
     "help": "Помощь",
@@ -186,6 +207,7 @@
     "it": "Italiano",
     "fr": "Français",
     "pt": "Português",
+    "ptBR": "Português (Brasil)",
     "ja": "日本語",
     "zhCN": "中文 (简体)",
     "zhTW": "中文 (繁體)",

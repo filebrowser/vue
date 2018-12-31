@@ -75,7 +75,13 @@
   },
   "login": {
     "password": "비밀번호",
+    "passwordConfirm": "Password Confirmation",
     "submit": "로그인",
+    "createAnAccount": "Create an account",
+    "loginInstead": "Already have an account",
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameTaken": "Username already taken",
+    "signup": "Signup",
     "username": "유저네임",
     "wrongCredentials": "유저네임 혹은 비밀번호가 올바르지 않습니다."
   },
@@ -140,7 +146,6 @@
     "ruleExample2": "Caddyfile파일의 접근을 방지합니다.",
     "rules": "룰",
     "rulesHelp": "각 유저별 룰을 허용/비허용 할지 정할 수 있습니다. 블락된 파일은 리스팅 되지 않고 유저들은 접근할 수 없습니다. 사용자의 접근 허용 범위와 관련해 정규표현식(regex)과 경로를 지원합니다.\n",
-    "rulesHelp2": "각 룰은 한줄에 하나씩 작성되어야 하며 {0} 또는 {1}로 시작되어야 합니다. 만약 정규 표현식을 사용한 식이나 경로를 사용할 경우 {2}를 꼭 사용해야 합니다.\n",
     "scope": "범위",
     "settingsUpdated": "설정 업데이트 완료!",
     "user": "유저",
@@ -151,7 +156,23 @@
     "userManagement": "유저 관리",
     "username": "유저네임",
     "users": "유저",
-    "userUpdated": "유저 정보 업데이트 완료!"
+    "globalRules": "This is a global set of allow and disallow rules. They apply to every user. You can define specific rules on each user's settings to override this ones.",
+    "allowSignup": "Allow users to signup",
+    "insertRegex": "Insert regex expression",
+    "insertPath": "Insert the path",
+    "userUpdated": "유저 정보 업데이트 완료!",
+    "generalSettings": "General settings",
+    "userDefaults": "User default settings",
+    "defaultUserDescription": "This are the default settings for new users.",
+    "perm": {
+      "create": "Create files and directories",
+      "delete": "Delete files and directories",
+      "download": "Download",
+      "edit": "Edit files",
+      "execute": "Execute commands",
+      "rename": "Rename or move files and directories",
+      "share": "Share files"
+    }
   },
   "sidebar": {
     "help": "도움(Help)",

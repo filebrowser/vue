@@ -75,7 +75,13 @@
   },
   "login": {
     "password": "密碼",
+    "passwordConfirm": "Password Confirmation",
     "submit": "登入",
+    "createAnAccount": "Create an account",
+    "loginInstead": "Already have an account",
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameTaken": "Username already taken",
+    "signup": "Signup",
     "username": "帳號",
     "wrongCredentials": "帳號或密碼錯誤"
   },
@@ -140,7 +146,6 @@
     "ruleExample2": "封鎖使用者存取其目錄範圍的根目錄下名為 Caddyfile 的檔案。",
     "rules": "規則",
     "rulesHelp": "您可以為該使用者製定一組黑名單或白名單式的規則，被屏蔽的檔案將不會顯示在清單中，使用者也無權限存取,支持相對於目錄範圍的路徑。",
-    "rulesHelp2": "每行一條規則，且必須以關鍵字 {0} 或 {1} 開頭。如要使用規則運算式，請在加上 {2} 之後再附上運算式或路徑。",
     "scope": "目錄範圍",
     "settingsUpdated": "設定已更新！",
     "user": "使用者",
@@ -151,7 +156,23 @@
     "userManagement": "使用者管理",
     "username": "使用者名稱",
     "users": "使用者",
-    "userUpdated": "使用者已更新！"
+    "globalRules": "This is a global set of allow and disallow rules. They apply to every user. You can define specific rules on each user's settings to override this ones.",
+    "allowSignup": "Allow users to signup",
+    "insertRegex": "Insert regex expression",
+    "insertPath": "Insert the path",
+    "userUpdated": "使用者已更新！",
+    "generalSettings": "General settings",
+    "userDefaults": "User default settings",
+    "defaultUserDescription": "This are the default settings for new users.",
+    "perm": {
+      "create": "Create files and directories",
+      "delete": "Delete files and directories",
+      "download": "Download",
+      "edit": "Edit files",
+      "execute": "Execute commands",
+      "rename": "Rename or move files and directories",
+      "share": "Share files"
+    }
   },
   "sidebar": {
     "help": "幫助",
@@ -167,13 +188,15 @@
   "search": {
     "images": "影像",
     "music": "音樂",
+    "notSupportedCommand": "This is a not supported command.",
     "pdf": "PDF",
     "pressToExecute": "按確定鍵執行。",
     "pressToSearch": "按確定鍵搜尋。",
     "search": "搜尋...",
     "searchOrCommand": "搜尋或者執行命令...",
     "searchOrSupportedCommand": "搜尋或使用您可以使用的命令(一次只能執行一個命令)：",
-    "type": "輸入並按確定鍵進行搜尋。",
+    "typeCommand": "Type and press enter to execute.",
+    "typeSearch": "Type and press enter to search.",
     "types": "類型",
     "video": "影片",
     "writeToSearch": "請輸入要搜尋的內容"

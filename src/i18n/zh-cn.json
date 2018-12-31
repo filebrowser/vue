@@ -75,7 +75,13 @@
   },
   "login": {
     "password": "密码",
+    "passwordConfirm": "Password Confirmation",
     "submit": "登录",
+    "createAnAccount": "Create an account",
+    "loginInstead": "Already have an account",
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameTaken": "Username already taken",
+    "signup": "Signup",
     "username": "用户名",
     "wrongCredentials": "用户名或密码错误"
   },
@@ -140,7 +146,6 @@
     "ruleExample2": "阻止用户访问其目录范围的根目录下名为 Caddyfile 的文件。",
     "rules": "规则",
     "rulesHelp": "您可以为该用户制定一组黑名单或白名单式的规则，被屏蔽的文件将不会显示在列表中，用户也无权限访问,支持相对于目录范围的路径。",
-    "rulesHelp2": "每行一条规则，且必须以关键词 {0} 或 {1} 开头。如要使用正则表达式，请在加上 {2} 之后再附上表达式或路径。",
     "scope": "目录范围",
     "settingsUpdated": "设置已更新！",
     "user": "用户",
@@ -151,7 +156,23 @@
     "userManagement": "用户管理",
     "username": "用户名",
     "users": "用户",
-    "userUpdated": "用户已更新！"
+    "globalRules": "This is a global set of allow and disallow rules. They apply to every user. You can define specific rules on each user's settings to override this ones.",
+    "allowSignup": "Allow users to signup",
+    "insertRegex": "Insert regex expression",
+    "insertPath": "Insert the path",
+    "userUpdated": "用户已更新！",
+    "generalSettings": "General settings",
+    "userDefaults": "User default settings",
+    "defaultUserDescription": "This are the default settings for new users.",
+    "perm": {
+      "create": "Create files and directories",
+      "delete": "Delete files and directories",
+      "download": "Download",
+      "edit": "Edit files",
+      "execute": "Execute commands",
+      "rename": "Rename or move files and directories",
+      "share": "Share files"
+    }
   },
   "sidebar": {
     "help": "帮助",
@@ -167,13 +188,15 @@
   "search": {
     "images": "图像",
     "music": "音乐",
+    "notSupportedCommand": "This is a not supported command.",
     "pdf": "PDF",
     "pressToExecute": "按回车键执行。",
     "pressToSearch": "按回车键搜索。",
     "search": "搜索...",
     "searchOrCommand": "搜索或者执行命令(Linux 代码)...",
     "searchOrSupportedCommand": "搜索或加入\"$\"前缀以使用其中一个您可以使用的命令：",
-    "type": "键入并按回车键进行搜索。",
+    "typeCommand": "Type and press enter to execute.",
+    "typeSearch": "Type and press enter to search.",
     "types": "类型",
     "video": "视频",
     "writeToSearch": "请输入要搜索的内容"

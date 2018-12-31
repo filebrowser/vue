@@ -75,7 +75,13 @@
   },
   "login": {
     "password": "Hasło",
+    "passwordConfirm": "Password Confirmation",
     "submit": "Login",
+    "createAnAccount": "Create an account",
+    "loginInstead": "Already have an account",
+    "passwordsDontMatch": "Passwords don't match",
+    "usernameTaken": "Username already taken",
+    "signup": "Signup",
     "username": "Nazwa użytkownika",
     "wrongCredentials": "Błędne dane logowania"
   },
@@ -140,7 +146,6 @@
     "ruleExample2": "blocks the access to the file named Caddyfile on the root of the scope.",
     "rules": "Uprawnienia",
     "rulesHelp": "Here you can define a set of allow and disallow rules for this specific user. The blocked files won't show up in the listings and they wont be accessible to the user. We support regex and paths relative to the users scope.\n",
-    "rulesHelp2": "Each rule goes in one different line and must start with the keyword {0} or {1}. Then you should write {2} if you are using a regular expression and then the expression or the path.\n",
     "scope": "Scope",
     "settingsUpdated": "Uprawnienia Zapisane!",
     "user": "Użytkownik",
@@ -151,7 +156,23 @@
     "userManagement": "Zarządzanie użytkownikami",
     "username": "Nazwa użytkownika",
     "users": "Użytkownicy",
-    "userUpdated": "Użytkownik zapisany!"
+    "globalRules": "This is a global set of allow and disallow rules. They apply to every user. You can define specific rules on each user's settings to override this ones.",
+    "allowSignup": "Allow users to signup",
+    "insertRegex": "Insert regex expression",
+    "insertPath": "Insert the path",
+    "userUpdated": "Użytkownik zapisany!",
+    "generalSettings": "General settings",
+    "userDefaults": "User default settings",
+    "defaultUserDescription": "This are the default settings for new users.",
+    "perm": {
+      "create": "Create files and directories",
+      "delete": "Delete files and directories",
+      "download": "Download",
+      "edit": "Edit files",
+      "execute": "Execute commands",
+      "rename": "Rename or move files and directories",
+      "share": "Share files"
+    }
   },
   "sidebar": {
     "help": "Pomoc",
