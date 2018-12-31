@@ -36,6 +36,10 @@ import Editor from '@/components/files/Editor'
 import { files as api } from '@/api'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 
+function clean (path) {
+  return path.endsWith('/') ? path.slice(0, -1) : path
+}
+
 export default {
   name: 'files',
   components: {
@@ -141,7 +145,11 @@ export default {
 
       try {
         const res = await api.fetch(url)
-        // TODO:  if (this.$store.state.baseURL + req.url !== window.location.pathname) return
+
+        if (clean(res.path) !== clean(`/${this.$route.params.pathMatch}`)) {
+          return
+        }
+
         this.$store.commit('updateRequest', res)
         document.title = res.name
       } catch (e) {

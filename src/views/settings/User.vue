@@ -51,6 +51,7 @@
 import { mapMutations } from 'vuex'
 import { users as api, settings } from '@/api'
 import UserForm from '@/components/settings/UserForm'
+import deepClone from 'lodash.clonedeep'
 
 export default {
   name: 'user',
@@ -133,8 +134,7 @@ export default {
           await api.update(user)
 
           if (user.id === this.$store.state.user.id) {
-            this.setUser({ ...user })
-            // TODO: fix
+            this.setUser({ ...deepClone(user) })
           }
 
           this.$showSuccess(this.$t('settings.userUpdated'))

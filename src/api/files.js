@@ -82,8 +82,7 @@ export function download (format, ...files) {
   window.open(url)
 }
 
-// TODO: see if this can be changed to fetch (ONPROGRESSS)
-export function post (url, content = '', overwrite = false, onupload) {
+export async function post (url, content = '', overwrite = false, onupload) {
   url = removePrefix(url)
 
   return new Promise((resolve, reject) => {
@@ -108,6 +107,7 @@ export function post (url, content = '', overwrite = false, onupload) {
     request.onerror = (error) => {
       reject(error)
     }
+
     request.send(content)
   })
 }
