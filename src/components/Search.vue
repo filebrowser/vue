@@ -47,9 +47,7 @@
             </div>
           </template>
         </template>
-        <pre v-else-if="this.isValidCommand && this.user.perm.execute">
-          <template v-for="c in results">{{ c }}</template>
-        </pre>
+        <pre v-else-if="this.isValidCommand && this.user.perm.execute"><template v-for="c in results">{{ c }}</template></pre>
         <ul v-else-if="results.length > 0">
           <li v-for="(s,k) in results" :key="k">
             <router-link @click.native="close" :to="'./' + s.path">
@@ -254,10 +252,10 @@ export default {
           path,
           this.command,
           event => {
-            this.results.push(event.data)
+            this.results.push(`${event.data}\n`)
             this.scrollable.scrollTop = this.scrollable.scrollHeight
           },
-          () => {
+          (event) => {
             this.reload = true
             this.ongoing = false
             this.scrollable.scrollTop = this.scrollable.scrollHeight
