@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['req']),
+    ...mapState([ 'req' ]),
     nav () {
       return decodeURIComponent(this.current)
     }

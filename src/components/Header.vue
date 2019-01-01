@@ -22,7 +22,7 @@
         </button>
 
         <!-- Menu that shows on listing AND mobile when there are files selected -->
-        <div id="file-selection" v-if="isMobile && req.kind === 'listing'">
+        <div id="file-selection" v-if="isMobile && isListing">
           <span v-if="selectedCount > 0">{{ selectedCount }} selected</span>
           <share-button v-show="showShareButton"></share-button>
           <rename-button v-show="showRenameButton"></rename-button>
