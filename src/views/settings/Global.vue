@@ -11,6 +11,28 @@
         <h3>{{ $t('settings.rules') }}</h3>
         <p class="small">{{ $t('settings.globalRules') }}</p>
         <rules :rules.sync="settings.rules" />
+
+        <h3>{{ $t('settings.branding') }}</h3>
+
+        <i18n path="settings.brandingHelp" tag="p" class="small">
+          <a class="link" target="_blank" href="https://docs.filebrowser.xyz/configuration/custom-branding">{{ $t('settings.documentation') }}</a>
+        </i18n>
+
+        <p>
+          <input type="checkbox" v-model="settings.branding.disableExternal" id="branding-links" />
+          {{ $t('settings.disableExternalLinks') }}
+        </p>
+
+        <p>
+          <label for="branding-name">{{ $t('settings.instanceName') }}</label>
+          <input type="text" v-model="settings.branding.name" id="branding-name" />
+        </p>
+
+        <p>
+          <label for="branding-files">{{ $t('settings.brandingDirectoryPath') }}</label>
+          <input type="text" v-model="settings.branding.files" id="branding-files" />
+        </p>
+      
       </div>
 
       <div class="card-action">
@@ -36,11 +58,15 @@
 
     <form class="card" @submit.prevent="save">
       <div class="card-title">
-        <h2>{{ $t('settings.commands') }}</h2>
+        <h2>{{ $t('settings.commandRunner') }}</h2>
       </div>
 
       <div class="card-content">
-        <p class="small">{{ $t('settings.commandsHelp') }}</p>
+        <i18n path="settings.commandRunnerHelp" tag="p" class="small">
+          <code>FILE</code>
+          <code>SCOPE</code>
+          <a class="link" target="_blank" href="https://docs.filebrowser.xyz/configuration/command-runner">{{ $t('settings.documentation') }}</a>
+        </i18n>
 
         <div v-for="command in settings.commands" :key="command.name" class="collapsible">
           <input :id="command.name" type="checkbox">

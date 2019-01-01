@@ -37,7 +37,7 @@
     "linkCopied": "Link copied!"
   },
   "errors": {
-    "forbidden": "You're not welcome here.",
+    "forbidden": "You don't have permissions to access this.",
     "internal": "Something really went wrong.",
     "notFound": "This location can't be reached."
   },
@@ -118,6 +118,12 @@
     "newArchetype": "Create a new post based on an archetype. Your file will be created on content folder."
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "Admin",
     "administrator": "Administrator",
     "allowCommands": "Execute commands",
@@ -126,8 +132,8 @@
     "allowPublish": "Publish new posts and pages",
     "avoidChanges": "(leave blank to avoid changes)",
     "changePassword": "Change Password",
-    "commands": "Commands",
-    "commandsHelp": "Here you can set commands that are executed in the named events. You write one command per line. If the event is related to files, such as before and after saving, the environment variable \"FILE\" will be available with the path of the file.\n",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "Commands updated!",
     "customStylesheet": "Custom Stylesheet",
     "examples": "Examples",
@@ -161,7 +167,6 @@
     "insertRegex": "Insert regex expression",
     "insertPath": "Insert the path",
     "userUpdated": "User updated!",
-    "generalSettings": "General settings",
     "userDefaults": "User default settings",
     "defaultUserDescription": "This are the default settings for new users.",
     "perm": {

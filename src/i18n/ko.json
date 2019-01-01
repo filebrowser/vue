@@ -118,6 +118,12 @@
     "newArchetype": "archetype에 기반한 포스트를 생성합니다. 파일은 컨텐트 폴더(content folder)에 생성됩니다."
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "관리자",
     "administrator": "관리자",
     "allowCommands": "명령어 실행",
@@ -126,8 +132,8 @@
     "allowPublish": "페이지(새글)를 생성하는 것을 허용합니다.",
     "avoidChanges": "(수정하기 싫으시면 그냥 놔두시면 됩니다)",
     "changePassword": "비밀번호 변경",
-    "commands": "명령들",
-    "commandsHelp": "named events안에서 실행될 커맨드를 설정할 수 있습니다. 한줄에 하나의 커맨드를 작성하실 수 있습니다. 이벤트가 저장 전 혹은 후를 핸들링 하는 것과 같이 파일과 관련있다면, \"FILE\" 환경 변수는 파일의 경로와 함께 사용하실 수 있습니다.\n",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "커맨드 업데이트 완료!",
     "customStylesheet": "사용자 설정 스타일시트",
     "examples": "예시",

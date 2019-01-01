@@ -118,6 +118,12 @@
     "newArchetype": "Crea un nuovo post basato su un modello. Il tuo file verrà creato nella cartella."
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "Admin",
     "administrator": "Amministratore",
     "allowCommands": "Esegui comandi",
@@ -126,8 +132,8 @@
     "allowPublish": "Pubblica nuovi post e pagine",
     "avoidChanges": "(lascia vuoto per evitare cambiamenti)",
     "changePassword": "Modifica password",
-    "commands": "Comandi",
-    "commandsHelp": "Qui è possibile impostare i comandi che vengono eseguiti negli eventi denominati. È possibile  scrovere un comando per riga. Se l'evento è corretato ad un file, come ad esempio prima e dopo un salvataggio, la variabile d'ambiente \"FILE\" sarà disponibile per l'uso e conterrà il percorso al file.\n",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "Comandi aggiornati!",
     "customStylesheet": "Folgio di stile personalizzato",
     "examples": "Esempi",

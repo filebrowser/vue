@@ -8,6 +8,10 @@
 @import "./dashboard.css";
 @import "./login.css";
 
+.link {
+  color: #2196f3;
+}
+
 /* * * * * * * * * * * * * * * *
  *            ACTION           *
  * * * * * * * * * * * * * * * */

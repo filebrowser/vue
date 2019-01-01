@@ -118,6 +118,12 @@
     "newArchetype": "创建一个基于原型的新帖子。您的文件将会创建在内容文件夹中。"
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "管理员",
     "administrator": "管理员",
     "allowCommands": "执行命令(Linux 代码)",
@@ -126,8 +132,8 @@
     "allowPublish": "发布新的帖子与页面",
     "avoidChanges": "(留空以避免更改)",
     "changePassword": "更改密码",
-    "commands": "命令(linux 代码)",
-    "commandsHelp": "在这里，您可以设置在指定事件下执行的命令，一行一条。若事件与文件相关，如“在保存文件前”，则文件的路径会被赋值给环境变量 \"FILE\"。",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "命令已更新！",
     "customStylesheet": "自定义样式表",
     "examples": "例子",

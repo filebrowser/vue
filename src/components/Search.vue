@@ -255,7 +255,7 @@ export default {
             this.results.push(`${event.data}\n`)
             this.scrollable.scrollTop = this.scrollable.scrollHeight
           },
-          (event) => {
+          () => {
             this.reload = true
             this.ongoing = false
             this.scrollable.scrollTop = this.scrollable.scrollHeight

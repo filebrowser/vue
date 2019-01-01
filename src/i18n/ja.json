@@ -118,6 +118,12 @@
     "newArchetype": "ある元型に基づいて新しいポストを作成します。ファイルは  コンテンツフォルダに作成されます。"
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "管理者",
     "administrator": "管理者",
     "allowCommands": "コマンドの実行",
@@ -126,8 +132,8 @@
     "allowPublish": "ポストとぺーじの発表",
     "avoidChanges": "(変更を避けるために空白にしてください)",
     "changePassword": "パスワードを変更",
-    "commands": "コマンド",
-    "commandsHelp": "ここで、名前付きイベントに実行するコマンドを設定することができます。一行にコマンド一つを入力してください。イベントはファイルに関連する場合、例えばファイル保存の前にまたは後で、環境変数 FILE はファイルのパスに割り当てられます。",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "コマンドは更新されました！",
     "customStylesheet": "カスタムスタイルシ ート",
     "examples": "例",

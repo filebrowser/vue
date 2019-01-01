@@ -118,6 +118,12 @@
     "newArchetype": "Erstelle neuen Beitrag auf dem Archetyp. Ihre Datei wird im Inhalteordner erstellt."
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "Admin",
     "administrator": "Administrator",
     "allowCommands": "Befehle ausführen",
@@ -126,8 +132,8 @@
     "allowPublish": "Veröffentlichen von neuen Beiträgen und Seiten",
     "avoidChanges": "(leer lassen um Änderungen zu vermeiden)",
     "changePassword": "Ändere das Passwort",
-    "commands": "Befehle",
-    "commandsHelp": "Hier können Befehle benannt werden, die bei Ereignissen ausgeführt werden. Man schreibt einen Befehl pro Zeile. Wenn ein Befehl einen Dateinamen benötigt, wie vor oder  nach dem Speichern, ist die Umgebungsvariable \"FILE\" mit dem Pfad der Datei verfügbar.\n",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "Befehle aktualisiert!",
     "customStylesheet": "Individuelles Stylesheet",
     "examples": "Beispiele",

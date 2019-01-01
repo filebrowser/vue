@@ -118,6 +118,12 @@
     "newArchetype": "إنشاء منشور من المنشور الأصلي. الملف سيتم انشاءه في مجلد المحتويات."
   },
   "settings": {
+    "instanceName": "Instance name",
+    "brandingDirectoryPath": "Branding directory path",
+    "documentation": "documentation",
+    "branding": "Branding",
+    "disableExternalLinks": "Disable external links (except documentation)",
+    "brandingHelp": "You can costumize how your File Browser instance looks and feels by changing its name, replacing the logo, adding custom styles and even disable external links to GitHub.\nFor more information about custom branding, please check out the {0}.",
     "admin": "Admin",
     "administrator": "Administrator",
     "allowCommands": "تنفيذ الأوامر",
@@ -126,8 +132,8 @@
     "allowPublish": "نشر مقالات وصفحات جديدة",
     "avoidChanges": "(أتركه فارغاً إن لم ترد تغييره)",
     "changePassword": "تغيير كلمة المرور",
-    "commands": "الأوامر",
-    "commandsHelp": "هنا يمكنك تحديد أوامر يمكن تنفيذها عند أحداث معينة. قم بكتابة أمر واحد في كل سطر. أذا كان الحدث متعلق بمجلد، مثل ما قبل أو بعد الحفظ، المتغير \"FILE\" سيكون متاح مع مسار الملف\n",
+    "commandRunner": "Command runner",
+    "commandRunnerHelp": "Here you can set commands that are executed in the named events. You must write one per line. The environment variables {0} and {1} will be available, being {0} relative to {1}. For more information about this feature and the available environment variables, please read the {2}.",
     "commandsUpdated": "تم تحديث الأوامر",
     "customStylesheet": "ستايل مخصص",
     "examples": "أمثلة",
