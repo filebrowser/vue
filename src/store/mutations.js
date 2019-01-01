@@ -27,6 +27,11 @@ const mutations = {
   setLoading: (state, value) => { state.loading = value },
   setReload: (state, value) => { state.reload = value },
   setUser: (state, value) => {
+    if (value === null) {
+      state.user = null
+      return
+    }
+
     let locale = value.locale
 
     if (locale === '') {

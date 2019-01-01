@@ -6,7 +6,7 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-  user: {},
+  user: null,
   req: {},
   oldReq: {},
   clipboard: {

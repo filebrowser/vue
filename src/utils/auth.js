@@ -3,7 +3,7 @@ import router from '@/router'
 import { Base64 } from 'js-base64'
 import { baseURL, noAuth } from '@/utils/constants'
 
-function parseToken (token) {
+export function parseToken (token) {
   const parts = token.split('.')
 
   if (parts.length !== 3) {
@@ -21,26 +21,12 @@ function parseToken (token) {
   store.commit('setUser', data.user)
 }
 
-async function loggedIn () {
-  if (noAuth) {
-    await login('', '', '')
-    return true
-  }
-
-  // TODO: reload token
+export async function validateLogin () {
   try {
-    if (store.state.jwt) {
-      parseToken(store.state.jwt)
-    } else if (localStorage.getItem('jwt')) {
+    if (localStorage.getItem('jwt')) {
       parseToken(localStorage.getItem('jwt'))
-    } else {
-      return false
     }
-
-    return true
-  } catch (_) {
-    return false
-  }
+  } catch (_) {}
 }
 
 async function login (username, password, recaptcha) {
@@ -81,12 +67,12 @@ async function signup (username, password) {
 
 function logout () {
   store.commit('setJWT', '')
+  store.commit('setUser', null)
   localStorage.setItem('jwt', null)
   router.push({path: '/login'})
 }
 
 export default {
-  loggedIn: loggedIn,
   login: login,
   logout: logout,
   signup: signup

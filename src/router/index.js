@@ -12,7 +12,6 @@ import ProfileSettings from '@/views/settings/Profile'
 import Error403 from '@/views/errors/403'
 import Error404 from '@/views/errors/404'
 import Error500 from '@/views/errors/500'
-import auth from '@/utils/auth'
 import store from '@/store'
 import { baseURL } from '@/utils/constants'
 
@@ -26,8 +25,12 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
-      beforeEnter: async function (to, from, next) {
-        if (await auth.loggedIn()) {
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isLogged) {
+          console.log('is logged')
+        }
+
+        if (store.getters.isLogged) {
           return next({ path: '/files' })
         }
 
@@ -36,21 +39,21 @@ const router = new Router({
       }
     },
     {
-      path: '/share/*',
-      name: 'Share',
-      component: Share
-    },
-    {
       path: '/*',
       component: Layout,
-      meta: {
-        requiresAuth: true
-      },
       children: [
+        {
+          path: '/share/*',
+          name: 'Share',
+          component: Share
+        },
         {
           path: '/files/*',
           name: 'Files',
-          component: Files
+          component: Files,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/settings',
@@ -58,6 +61,9 @@ const router = new Router({
           component: Settings,
           redirect: {
             path: '/settings/profile'
+          },
+          meta: {
+            requiresAuth: true
           },
           children: [
             {
@@ -123,13 +129,11 @@ const router = new Router({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   document.title = to.name
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!await auth.loggedIn()) {
+    if (!store.getters.isLogged) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }

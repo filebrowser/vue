@@ -2,6 +2,9 @@ import store from '@/store'
 import { baseURL } from '@/utils/constants'
 
 export function fetchURL (url, opts) {
+  // TODO: check validity of token and update if 1 hr less to invalidate
+  // TODO: how to solve perms update
+
   opts = opts || {}
   opts.headers = opts.headers || {}
 

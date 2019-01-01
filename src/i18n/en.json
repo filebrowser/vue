@@ -181,6 +181,8 @@
   },
   "sidebar": {
     "help": "Help",
+    "login": "Login",
+    "signup": "Signup",
     "logout": "Logout",
     "myFiles": "My files",
     "newFile": "New file",

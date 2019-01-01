@@ -23,7 +23,6 @@ import { name, logoURL, recaptcha, recaptchaKey, signup } from '@/utils/constant
 
 export default {
   name: 'login',
-  props: ['dependencies'],
   computed: {
     signup: () => signup,
     name: () => name,
@@ -40,21 +39,13 @@ export default {
     }
   },
   mounted () {
-    if (this.dependencies) this.setup()
-  },
-  watch: {
-    dependencies: function (val) {
-      if (val) this.setup()
-    }
+    if (!recaptcha) return
+
+    window.grecaptcha.render('recaptcha', {
+      sitekey: recaptchaKey
+    })
   },
   methods: {
-    setup () {
-      if (!recaptcha) return
-
-      window.grecaptcha.render('recaptcha', {
-        sitekey: recaptchaKey
-      })
-    },
     toggleMode () {
       this.createMode = !this.createMode
     },
