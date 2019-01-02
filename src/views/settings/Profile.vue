@@ -11,7 +11,7 @@
       </div>
 
       <div class="card-action">
-        <input class="flat" type="submit" :value="$t('buttons.update')">
+        <input class="button button--flat" type="submit" :value="$t('buttons.update')">
       </div>
     </form>
 
@@ -26,7 +26,7 @@
       </div>
 
       <div class="card-action">
-        <input class="flat" type="submit" :value="$t('buttons.update')">
+        <input class="button button--flat" type="submit" :value="$t('buttons.update')">
       </div>
     </form>
   </div>

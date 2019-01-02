@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-title">
       <h2>{{ $t('settings.users') }}</h2>
-      <router-link to="/settings/users/new"><button class="flat">{{ $t('buttons.new') }}</button></router-link>
+      <router-link to="/settings/users/new"><button class="button">{{ $t('buttons.new') }}</button></router-link>
     </div>
 
     <div class="card-content full">

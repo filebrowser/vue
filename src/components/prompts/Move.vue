@@ -9,11 +9,11 @@
     </div>
 
     <div class="card-action">
-      <button class="flat cancel"
+      <button class="button button--flat button--grey"
         @click="$store.commit('closeHovers')"
         :aria-label="$t('buttons.cancel')"
         :title="$t('buttons.cancel')">{{ $t('buttons.cancel') }}</button>
-      <button class="flat"
+      <button class="button button--flat"
         @click="move"
         :disabled="$route.path === dest"
         :aria-label="$t('buttons.move')"

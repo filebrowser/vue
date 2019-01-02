@@ -11,13 +11,13 @@
 
     <div class="card-action">
       <button
-        class="cancel flat"
+        class="button button--flat button--grey"
         @click="$store.commit('closeHovers')"
         :aria-label="$t('buttons.cancel')"
         :title="$t('buttons.cancel')"
       >{{ $t('buttons.cancel') }}</button>
       <button
-        class="flat"
+        class="button button--flat"
         :aria-label="$t('buttons.create')"
         :title="$t('buttons.create')"
         @click="submit"

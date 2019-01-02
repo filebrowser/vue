@@ -49,7 +49,7 @@
     </div>
 
     <div class="card-action">
-      <button class="flat"
+      <button class="button button--flat"
         @click="$store.commit('closeHovers')"
         :aria-label="$t('buttons.close')"
         :title="$t('buttons.close')">{{ $t('buttons.close') }}</button>

@@ -17,11 +17,11 @@
         v-model="rule.path"
         :placeholder="$t('settings.insertPath')" />
 
-      <button class="delete" @click="remove($event, index)">-</button>
+      <button class="button button--red" @click="remove($event, index)">-</button>
     </div>
 
     <div>
-      <button @click="create" default="false">{{ $t('buttons.new') }}</button>
+      <button class="button" @click="create" default="false">{{ $t('buttons.new') }}</button>
     </div>
   </form>
 </template>

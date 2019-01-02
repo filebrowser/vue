@@ -27,7 +27,7 @@
     <div class="card-action">
       <button type="submit"
         @click="$store.commit('closeHovers')"
-        class="flat"
+        class="button button--flat"
         :aria-label="$t('buttons.ok')"
         :title="$t('buttons.ok')">{{ $t('buttons.ok') }}</button>
     </div>

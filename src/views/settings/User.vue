@@ -15,11 +15,11 @@
           v-if="!isNew"
           @click.prevent="deletePrompt"
           type="button"
-          class="flat delete"
+          class="button button--flat button--red"
           :aria-label="$t('buttons.delete')"
           :title="$t('buttons.delete')">{{ $t('buttons.delete') }}</button>
         <input
-          class="flat"
+          class="button button--flat"
           type="submit"
           :value="$t('buttons.save')">
       </div>

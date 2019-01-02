@@ -98,7 +98,7 @@ p code {
 }
 
 .dashboard #nav li.active {
-  border-color: #2196f3
+  border-color: var(--blue)
 }
 
 .dashboard #nav i {
@@ -241,7 +241,7 @@ table tr>*:last-child {
 }
 
 .card#share ul li a {
-  color: #2196F3;
+  color: var(--blue);
   cursor: pointer;
   margin-right: auto;
 }
@@ -310,7 +310,7 @@ table tr>*:last-child {
 }
 
 .file-list li[aria-selected=true] {
-  background: #2196f3 !important;
+  background: var(--blue) !important;
   color: #fff !important;
   transition: .1s ease all;
 }

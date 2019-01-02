@@ -1,6 +1,11 @@
 @import "~normalize.css/normalize.css";
 @import "~noty/lib/noty.css";
 @import "~noty/lib/themes/mint.css";
+
+@import "./_variables.css";
+@import "./_buttons.css";
+
+
 @import "./fonts.css";
 @import "./base.css";
 @import "./header.css";
@@ -9,7 +14,7 @@
 @import "./login.css";
 
 .link {
-  color: #2196f3;
+  color: var(--blue);
 }
 
 /* * * * * * * * * * * * * * * *
@@ -87,7 +92,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: #2196f3;
+  background: var(--blue);
   color: #fff;
   border-radius: 50%;
   font-size: .75em;

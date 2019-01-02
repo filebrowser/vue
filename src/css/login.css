@@ -44,7 +44,7 @@
 }
 
 #login .wrong {
-  background: #F44336;
+  background: var(--red);
   color: #fff;
   padding: .5em;
   text-align: center;
@@ -78,7 +78,7 @@
 #login p {
   cursor: pointer;
   text-align: right;
-  color: #2196f3;
+  color: var(--blue);
   text-transform: lowercase;
   font-weight: 500;
   font-size: 0.9rem;
