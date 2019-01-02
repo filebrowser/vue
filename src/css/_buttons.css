@@ -16,9 +16,9 @@
 }
 
 .button--block {
+  margin: 0 0 0.5em;
   display: block;
   width: 100%;
-  margin: 0 0 1em;
 }
 
 .button--red {

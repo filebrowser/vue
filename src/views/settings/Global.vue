@@ -25,12 +25,12 @@
 
         <p>
           <label for="branding-name">{{ $t('settings.instanceName') }}</label>
-          <input type="text" v-model="settings.branding.name" id="branding-name" />
+          <input class="input input--block" type="text" v-model="settings.branding.name" id="branding-name" />
         </p>
 
         <p>
           <label for="branding-files">{{ $t('settings.brandingDirectoryPath') }}</label>
-          <input type="text" v-model="settings.branding.files" id="branding-files" />
+          <input class="input input--block" type="text" v-model="settings.branding.files" id="branding-files" />
         </p>
       
       </div>
@@ -75,7 +75,7 @@
             <i class="material-icons">arrow_drop_down</i>
           </label>
           <div class="collapse">
-            <textarea v-model.trim="command.value"></textarea>
+            <textarea class="input input--block input--textarea" v-model.trim="command.value"></textarea>
           </div>
         </div>
       </div>

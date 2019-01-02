@@ -2,22 +2,22 @@
   <div>
     <p v-if="!isDefault">
       <label for="username">{{ $t('settings.username') }}</label>
-      <input type="text" v-model="user.username" id="username">
+      <input class="input input--block" type="text" v-model="user.username" id="username">
     </p>
 
     <p v-if="!isDefault">
       <label for="password">{{ $t('settings.password') }}</label>
-      <input type="password" :placeholder="passwordPlaceholder" v-model="user.password" id="password">
+      <input class="input input--block" type="password" :placeholder="passwordPlaceholder" v-model="user.password" id="password">
     </p>
 
     <p>
       <label for="scope">{{ $t('settings.scope') }}</label>
-      <input type="text" v-model="user.scope" id="scope">
+      <input class="input input--block" type="text" v-model="user.scope" id="scope">
     </p>
 
     <p>
       <label for="locale">{{ $t('settings.language') }}</label>
-      <languages id="locale" :locale.sync="user.locale"></languages>
+      <languages class="input input--block" id="locale" :locale.sync="user.locale"></languages>
     </p>
 
     <p v-if="!isDefault">

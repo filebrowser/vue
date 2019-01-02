@@ -6,7 +6,7 @@
 
     <div class="card-content">
       <p>{{ $t('prompts.newFileMessage') }}</p>
-      <input v-focus type="text" @keyup.enter="submit" v-model.trim="name">
+      <input class="input input--block" v-focus type="text" @keyup.enter="submit" v-model.trim="name">
     </div>
 
     <div class="card-action">

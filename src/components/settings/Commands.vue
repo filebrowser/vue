@@ -2,7 +2,7 @@
   <div>
     <h3>{{ $t('settings.userCommands') }}</h3>
     <p class="small">{{ $t('settings.userCommandsHelp') }} <i>git svn hg</i>.</p>
-    <input type="text" v-model.trim="raw">
+    <input class="input input--block" type="text" v-model.trim="raw">
   </div>
 </template>
 

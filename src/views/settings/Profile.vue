@@ -7,7 +7,7 @@
 
       <div class="card-content">
         <h3>{{ $t('settings.language') }}</h3>
-        <p><languages id="locale" :locale.sync="locale"></languages></p>
+        <languages class="input input--block" :locale.sync="locale"></languages>
       </div>
 
       <div class="card-action">
@@ -21,8 +21,8 @@
       </div>
 
       <div class="card-content">
-        <p><input :class="passwordClass" type="password" :placeholder="$t('settings.newPassword')" v-model="password" name="password"></p>
-        <p><input :class="passwordClass" type="password" :placeholder="$t('settings.newPasswordConfirm')" v-model="passwordConf" name="password"></p>
+        <input :class="passwordClass" type="password" :placeholder="$t('settings.newPassword')" v-model="password" name="password">
+        <input :class="passwordClass" type="password" :placeholder="$t('settings.newPasswordConfirm')" v-model="passwordConf" name="password">
       </div>
 
       <div class="card-action">
@@ -52,15 +52,17 @@ export default {
   computed: {
     ...mapState([ 'user' ]),
     passwordClass () {
+      const baseClass = 'input input--block'
+
       if (this.password === '' && this.passwordConf === '') {
-        return ''
+        return baseClass
       }
 
       if (this.password === this.passwordConf) {
-        return 'green'
+        return `${baseClass} input--green`
       }
 
-      return 'red'
+      return `${baseClass} input--red`
     }
   },
   created () {

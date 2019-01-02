@@ -5,12 +5,12 @@
       <h1>{{ name }}</h1>
       <div v-if="error !== ''" class="wrong">{{ error }}</div>
 
-      <input type="text" v-model="username" :placeholder="$t('login.username')">
-      <input type="password" v-model="password" :placeholder="$t('login.password')">
-      <input v-if="createMode" type="password" v-model="passwordConfirm" :placeholder="$t('login.passwordConfirm')" />
+      <input class="input input--block" type="text" v-model="username" :placeholder="$t('login.username')">
+      <input class="input input--block" type="password" v-model="password" :placeholder="$t('login.password')">
+      <input class="input input--block" v-if="createMode" type="password" v-model="passwordConfirm" :placeholder="$t('login.passwordConfirm')" />
 
       <div v-if="recaptcha" id="recaptcha"></div>
-      <input class="button" type="submit" :value="createMode ? $t('login.signup') : $t('login.submit')">
+      <input class="button button--block" type="submit" :value="createMode ? $t('login.signup') : $t('login.submit')">
 
       <p @click="toggleMode" v-if="signup">{{ createMode ? $t('login.loginInstead') : $t('login.createAnAccount') }}</p>
     </form>
