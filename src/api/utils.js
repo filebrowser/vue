@@ -1,22 +1,26 @@
 import store from '@/store'
+import { renew } from '@/utils/auth'
 import { baseURL } from '@/utils/constants'
 
-export function fetchURL (url, opts) {
-  // TODO: check validity of token and update if 1 hr less to invalidate
-  // TODO: how to solve perms update
-
+export async function fetchURL (url, opts) {
   opts = opts || {}
   opts.headers = opts.headers || {}
 
   let { headers, ...rest } = opts
 
-  return fetch(`${baseURL}${url}`, {
+  const res = await fetch(`${baseURL}${url}`, {
     headers: {
       'Authorization': `Bearer ${store.state.jwt}`,
       ...headers
     },
     ...rest
   })
+
+  if (res.headers.get('X-Renew-Token') === 'true') {
+    await renew(store.state.jwt)
+  }
+
+  return res
 }
 
 export async function fetchJSON (url, opts) {

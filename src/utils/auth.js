@@ -1,7 +1,7 @@
 import store from '@/store'
 import router from '@/router'
 import { Base64 } from 'js-base64'
-import { baseURL, noAuth } from '@/utils/constants'
+import { baseURL } from '@/utils/constants'
 
 export function parseToken (token) {
   const parts = token.split('.')
@@ -24,12 +24,14 @@ export function parseToken (token) {
 export async function validateLogin () {
   try {
     if (localStorage.getItem('jwt')) {
-      parseToken(localStorage.getItem('jwt'))
+      await renew(localStorage.getItem('jwt'))
     }
-  } catch (_) {}
+  } catch (_) {
+    console.info('Invalid JWT token in storage')
+  }
 }
 
-async function login (username, password, recaptcha) {
+export async function login (username, password, recaptcha) {
   const data = { username, password, recaptcha }
 
   const res = await fetch(`${baseURL}/api/login`, {
@@ -49,7 +51,24 @@ async function login (username, password, recaptcha) {
   }
 }
 
-async function signup (username, password) {
+export async function renew (jwt) {
+  const res = await fetch(`${baseURL}/api/renew`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${jwt}`,
+    }
+  })
+
+  const body = await res.text()
+
+  if (res.status === 200) {
+    parseToken(body)
+  } else {
+    throw new Error(body)
+  }
+}
+
+export async function signup (username, password) {
   const data = { username, password }
 
   const res = await fetch(`${baseURL}/api/signup`, {
@@ -65,15 +84,9 @@ async function signup (username, password) {
   }
 }
 
-function logout () {
+export function logout () {
   store.commit('setJWT', '')
   store.commit('setUser', null)
   localStorage.setItem('jwt', null)
   router.push({path: '/login'})
-}
-
-export default {
-  login: login,
-  logout: logout,
-  signup: signup
 }

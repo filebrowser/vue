@@ -55,7 +55,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import auth from '@/utils/auth'
+import * as auth from '@/utils/auth'
 import { version, signup, disableExternal, noAuth } from '@/utils/constants'
 
 export default {

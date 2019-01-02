@@ -27,10 +27,6 @@ const router = new Router({
       component: Login,
       beforeEnter: (to, from, next) => {
         if (store.getters.isLogged) {
-          console.log('is logged')
-        }
-
-        if (store.getters.isLogged) {
           return next({ path: '/files' })
         }
 

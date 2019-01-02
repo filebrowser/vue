@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import auth from '@/utils/auth'
+import * as auth from '@/utils/auth'
 import { name, logoURL, recaptcha, recaptchaKey, signup } from '@/utils/constants'
 
 export default {
