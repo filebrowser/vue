@@ -210,7 +210,10 @@ export default {
       event.preventDefault()
     },
     copyCut (event, key) {
-      event.preventDefault()
+      if (event.target.tagName.toLowerCase() === 'input') {
+        return
+      }
+
       let items = []
 
       for (let i of this.selected) {
@@ -218,6 +221,10 @@ export default {
           from: this.req.items[i].url,
           name: encodeURIComponent(this.req.items[i].name)
         })
+      }
+
+      if (items.length == 0) {
+        return
       }
 
       this.$store.commit('updateClipboard', {
@@ -230,15 +237,21 @@ export default {
         return
       }
 
-      event.preventDefault()
-
       let items = []
 
       for (let item of this.$store.state.clipboard.items) {
-        items.push({
-          from: item.from,
-          to: this.$route.path + item.name
-        })
+        const from = item.from.endsWith('/') ? item.from.slice(0, -1) : item.from
+        const to = this.$route.path + item.name
+
+        if (from === to) {
+          return
+        }
+
+        items.push({ from, to })
+      }
+
+      if (items.length === 0) {
+        return
       }
 
       if (this.$store.state.clipboard.key === 'x') {
