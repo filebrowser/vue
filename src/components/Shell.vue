@@ -7,7 +7,14 @@
 
     <div class="shell__result" :class="{ 'shell__result--hidden': !canInput }" >
       <div class="shell__prompt"><i class="material-icons">chevron_right</i></div>
-      <pre tabindex="0" ref="input" class="shell__text" contenteditable="true" @keypress.prevent.enter="submit" />
+      <pre
+        tabindex="0"
+        ref="input"
+        class="shell__text"
+        contenteditable="true"
+        @keydown.prevent.38="historyUp"
+        @keydown.prevent.40="historyDown"
+        @keypress.prevent.enter="submit" />
     </div>
   </div>
 </template>
@@ -31,6 +38,8 @@ export default {
   },
   data: () => ({
     content: [],
+    history: [],
+    historyPos: 0,
     canInput: true
   }),
   methods: {
@@ -40,6 +49,21 @@ export default {
     },
     focus: function () {
       this.$refs.input.focus()
+    },
+    historyUp () {
+      if (this.historyPos > 0) {
+        this.$refs.input.innerText = this.history[--this.historyPos]
+        this.focus()
+      }
+    },
+    historyDown () {
+      if (this.historyPos >= 0 && this.historyPos < this.history.length - 1) {
+        this.$refs.input.innerText = this.history[++this.historyPos]
+        this.focus()
+      } else {
+        this.historyPos = this.history.length
+        this.$refs.input.innerText = ''
+      }
     },
     submit: function (event) {
       const cmd = event.target.innerText.trim()
@@ -64,9 +88,11 @@ export default {
       event.target.innerHTML = ''
 
       let results = {
-        text: `${cmd}\n`
+        text: `${cmd}\n\n`
       }
-
+      
+      this.history.push(cmd)
+      this.historyPos = this.history.length
       this.content.push(results)
 
       api.command(
