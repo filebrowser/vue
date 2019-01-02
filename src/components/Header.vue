@@ -13,7 +13,7 @@
           <i class="material-icons">search</i>
         </button>
 
-        <button v-show="isEditor" :aria-label="$t('buttons.save')" :title="$t('buttons.save')" class="action" id="save-button">
+        <button v-show="showSaveButton" :aria-label="$t('buttons.save')" :title="$t('buttons.save')" class="action" id="save-button">
           <i class="material-icons">save</i>
         </button>
 
@@ -43,7 +43,7 @@
 
           <shell-button v-show="user.perm.execute" />
           <switch-button v-show="isListing"></switch-button>
-          <download-button v-show="isFiles"></download-button>
+          <download-button v-show="showDownloadButton"></download-button>
           <upload-button v-show="showUpload"></upload-button>
           <info-button v-show="isFiles"></info-button>
 
@@ -128,6 +128,12 @@ export default {
     },
     showUpload () {
       return this.isListing && this.user.perm.create
+    },
+    showSaveButton () {
+      return this.isEditor && this.user.perm.modify
+    },
+    showDownloadButton () {
+      return this.isFiles && this.user.perm.download
     },
     showDeleteButton () {
       return this.isFiles && (this.isListing

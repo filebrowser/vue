@@ -49,11 +49,11 @@ async function resourceAction (url, method, content) {
   }
 }
 
-export function remove (url) {
+export async function remove (url) {
   return resourceAction(url, 'DELETE')
 }
 
-export function put (url, content = '') {
+export async function put (url, content = '') {
   return resourceAction(url, 'PUT', content)
 }
 

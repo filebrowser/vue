@@ -7,7 +7,7 @@
 
       <rename-button v-if="user.perm.rename"></rename-button>
       <delete-button v-if="user.perm.delete"></delete-button>
-      <download-button></download-button>
+      <download-button v-if="user.perm.download"></download-button>
       <info-button></info-button>
     </div>
 
@@ -36,8 +36,6 @@
       <a v-else-if="req.type == 'blob'" :href="download">
         <h2 class="message">{{ $t('buttons.download') }} <i class="material-icons">file_download</i></h2>
       </a>
-      <!-- TODO: use editor read only -->
-      <pre v-else >{{ req.content }}</pre>
     </div>
   </div>
 </template>
@@ -51,6 +49,13 @@ import InfoButton from '@/components/buttons/Info'
 import DeleteButton from '@/components/buttons/Delete'
 import RenameButton from '@/components/buttons/Rename'
 import DownloadButton from '@/components/buttons/Download'
+
+const mediaTypes = [
+  "image",
+  "video",
+  "audio",
+  "blob"
+]
 
 export default {
   name: 'preview',
@@ -131,12 +136,18 @@ export default {
           continue
         }
 
-        if (i !== 0) {
-          this.previousLink = items[i - 1].url
+        for (let j = i - 1; j >= 0; j--) {
+          if (mediaTypes.includes(items[j].type)) {
+            this.previousLink = items[j].url
+            break
+          }
         }
 
-        if (i !== items.length - 1) {
-          this.nextLink = items[i + 1].url
+        for (let j = i + 1; j < items.length; j++) {
+          if (mediaTypes.includes(items[j].type)) {
+            this.nextLink = items[j].url
+            break
+          }
         }
 
         return

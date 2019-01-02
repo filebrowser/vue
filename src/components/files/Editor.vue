@@ -40,6 +40,7 @@ export default {
       minLines: 20,
       value: this.req.content,
       showPrintMargin: false,
+      readOnly: this.req.type === 'textImmutable',
       theme: 'ace/theme/chrome',
       mode: modelist.getModeForPath(this.req.name).mode
     })
@@ -62,7 +63,7 @@ export default {
       buttons.loading('save')
 
       try {
-        api.put(this.$route.path, this.editor.getValue())
+        await api.put(this.$route.path, this.editor.getValue())
         buttons.success(button)
       } catch (e) {
         buttons.done(button)
