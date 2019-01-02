@@ -1,6 +1,7 @@
 {
   "permanent": "Permanent",
   "buttons": {
+    "shell": "Toggle shell",
     "cancel": "Cancel",
     "close": "Close",
     "copy": "Copy",

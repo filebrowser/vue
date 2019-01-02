@@ -29,20 +29,6 @@ video {
   width: 100%;
 }
 
-pre {
-  padding: 1em;
-  border: 1px solid #e6e6e6;
-  border-radius: 0.5em;
-  background-color: #f5f5f5;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-}
-
-
-
 .mobile-only {
   display: none !important;
 }

@@ -131,18 +131,6 @@ export default {
         this.closeHovers()
       }
     })
-
-    // Gets the result div which will be scrollable.
-    this.scrollable = document.querySelector("#search #result")
-
-    this.scrollable.addEventListener("scroll", () => {
-      if (
-        this.scrollable.scrollTop ===
-        this.scrollable.scrollHeight - this.scrollable.offsetHeight
-      ) {
-        this.resultsCount += 50
-      }
-    })
   },
   methods: {
     ...mapMutations(["showHover", "closeHovers", "setReload"]),

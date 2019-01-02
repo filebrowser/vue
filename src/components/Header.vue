@@ -41,6 +41,7 @@
             <delete-button v-show="showDeleteButton"></delete-button>
           </div>
 
+          <shell-button v-show="user.perm.execute" />
           <switch-button v-show="isListing"></switch-button>
           <download-button v-show="isFiles"></download-button>
           <upload-button v-show="showUpload"></upload-button>
@@ -69,6 +70,7 @@ import SwitchButton from './buttons/SwitchView'
 import MoveButton from './buttons/Move'
 import CopyButton from './buttons/Copy'
 import ShareButton from './buttons/Share'
+import ShellButton from './buttons/Shell'
 import {mapGetters, mapState} from 'vuex'
 import { logoURL } from '@/utils/constants'
 import * as api from '@/api'
@@ -86,7 +88,8 @@ export default {
     CopyButton,
     UploadButton,
     SwitchButton,
-    MoveButton
+    MoveButton,
+    ShellButton
   },
   data: function () {
     return {

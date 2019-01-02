@@ -20,6 +20,7 @@ const state = {
   selected: [],
   multiple: false,
   show: null,
+  showShell: false,
   showMessage: null,
   showConfirm: null
 }

@@ -36,6 +36,7 @@
       <a v-else-if="req.type == 'blob'" :href="download">
         <h2 class="message">{{ $t('buttons.download') }} <i class="material-icons">file_download</i></h2>
       </a>
+      <!-- TODO: use editor read only -->
       <pre v-else >{{ req.content }}</pre>
     </div>
   </div>
