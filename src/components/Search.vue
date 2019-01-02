@@ -18,8 +18,8 @@
         ref="input"
         :autofocus="active"
         v-model.trim="value"
-        :aria-label="$t('search.writeToSearch')"
-        :placeholder="placeholder"
+        :aria-label="$t('search.search')"
+        :placeholder="$t('search.search')"
       >
     </div>
 
@@ -47,7 +47,6 @@
             </div>
           </template>
         </template>
-        <pre v-else-if="this.isValidCommand && this.user.perm.execute"><template v-for="c in results">{{ c }}</template></pre>
         <ul v-else-if="results.length > 0">
           <li v-for="(s,k) in results" :key="k">
             <router-link @click.native="close" :to="'./' + s.path">
@@ -115,70 +114,15 @@ export default {
     boxes() {
       return boxes
     },
-    placeholder() {
-      if (
-        this.user.perm.execute &&
-        this.user.commands &&
-        this.user.commands.length > 0
-      ) {
-        return this.$t("search.searchOrCommand")
-      }
-
-      return this.$t("search.search")
-    },
     isEmpty() {
       return this.results.length === 0
-    },
-    isCommand() {
-      return this.value === "" ? false : this.value[0] === "$"
-    },
-    isValidCommand() {
-      if (!this.isCommand) {
-        return false
-      }
-
-      const cmd = this.command.split(" ")[0]
-
-      for (const perm of this.user.commands) {
-        if (cmd.match(perm)) {
-          return true
-        }
-      }
-
-      return false
-    },
-    command() {
-      if (!this.isCommand) return ""
-      return this.value[1] === " " ? this.value.slice(2) : this.value.slice(1)
     },
     text() {
       if (this.ongoing) {
         return ""
       }
 
-      if (this.value.length === 0) {
-        if (this.user.perm.execute && this.user.commands.length > 0) {
-          return `${this.$t(
-            "search.searchOrSupportedCommand"
-          )} ${this.user.commands.join(", ")}.`
-        }
-
-        return this.$t("search.typeSearch")
-      }
-
-      if (!this.user.perm.execute || this.value[0] !== "$") {
-        return this.$t("search.pressToSearch")
-      }
-
-      if (this.command === 0) {
-        return this.$t("search.typeCommand")
-      }
-
-      if (this.isValidCommand) {
-        return this.$t("search.pressToExecute")
-      }
-
-      return this.$t("search.notSupportedCommand")
+      return this.value === '' ? this.$t("search.typeToSearch") : this.$t("search.pressToSearch")
     }
   },
   mounted() {
@@ -232,10 +176,6 @@ export default {
     async submit(event) {
       event.preventDefault()
 
-      if (this.isCommand && !this.isValidCommand) {
-        return
-      }
-      
       if (this.value === '') {
         return
       }
@@ -246,24 +186,6 @@ export default {
       }
 
       this.ongoing = true
-
-      if (this.isValidCommand && this.user.perm.execute) {
-        api.command(
-          path,
-          this.command,
-          event => {
-            this.results.push(`${event.data}\n`)
-            this.scrollable.scrollTop = this.scrollable.scrollHeight
-          },
-          () => {
-            this.reload = true
-            this.ongoing = false
-            this.scrollable.scrollTop = this.scrollable.scrollHeight
-          }
-        )
-
-        return
-      }
 
       let results = []
 

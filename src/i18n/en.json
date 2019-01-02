@@ -195,18 +195,12 @@
   "search": {
     "images": "Images",
     "music": "Music",
-    "notSupportedCommand": "This is a not supported command.",
     "pdf": "PDF",
-    "pressToExecute": "Press enter to execute.",
-    "pressToSearch": "Press enter to search.",
-    "search": "Search...",
-    "searchOrCommand": "Search or execute a command...",
-    "searchOrSupportedCommand": "Search or prepend '$' and use one of your supported commands:",
-    "typeCommand": "Type and press enter to execute.",
-    "typeSearch": "Type and press enter to search.",
     "types": "Types",
     "video": "Video",
-    "writeToSearch": "Write here to search"
+    "search": "Search...",
+    "typeToSearch": "Type to search...",
+    "pressToSearch": "Press enter to search..."
   },
   "languages": {
     "ar": "العربية",
