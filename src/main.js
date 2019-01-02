@@ -25,6 +25,8 @@ async function start () {
           resolve()
         }
       }
+
+      check()
     })
   }
 
