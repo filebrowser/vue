@@ -1,11 +1,11 @@
 <template>
   <div @click="focus" class="shell" ref="scrollable" :class="{ ['shell--hidden']: !showShell}">
-    <div v-for="(c, index) in content" :key="index" class="shell__result" :class="{ prompt: c.prompt }" >
-      <div class="shell__prompt"><i v-if="c.prompt" class="material-icons">chevron_right</i></div>
+    <div v-for="(c, index) in content" :key="index" class="shell__result" >
+      <div class="shell__prompt"><i class="material-icons">chevron_right</i></div>
       <pre class="shell__text">{{ c.text }}</pre>
     </div>
 
-    <div class="shell__result prompt" :class="{ 'shell__result--hidden': !canInput }" >
+    <div class="shell__result" :class="{ 'shell__result--hidden': !canInput }" >
       <div class="shell__prompt"><i class="material-icons">chevron_right</i></div>
       <pre tabindex="0" ref="input" class="shell__text" contenteditable="true" @keypress.prevent.enter="submit" />
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapMutations, mapState, mapGetters } from 'vuex'
 import { ws as api } from '@/api'
 
 export default {
@@ -34,6 +34,7 @@ export default {
     canInput: true
   }),
   methods: {
+    ...mapMutations([ 'toggleShell' ]),
     scroll: function () {
       this.$refs.scrollable.scrollTop = this.$refs.scrollable.scrollHeight
     },
@@ -47,23 +48,23 @@ export default {
         return
       }
 
-      if (cmd === 'clear()') {
+      if (cmd === 'clear') {
         this.content = []
         event.target.innerHTML = ''
         return
       }
 
-      this.content.push({
-        prompt: true,
-        text: cmd
-      })
+      if (cmd === 'exit') {
+        event.target.innerHTML = ''
+        this.toggleShell()
+        return
+      }
 
       this.canInput = false
       event.target.innerHTML = ''
 
       let results = {
-        prompt: false,
-        text: ''
+        text: `${cmd}\n`
       }
 
       this.content.push(results)
