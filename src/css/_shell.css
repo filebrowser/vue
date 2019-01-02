@@ -20,6 +20,7 @@
   display: flex;
   padding: 0.5em;
   align-items: flex-start;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .shell--hidden {
@@ -28,10 +29,6 @@
 
 .shell__result--hidden {
   opacity: 0;
-}
-
-.shell__result.prompt {
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .shell__text,
