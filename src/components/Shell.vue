@@ -21,7 +21,7 @@
 
 <script>
 import { mapMutations, mapState, mapGetters } from 'vuex'
-import { ws as api } from '@/api'
+import { commands } from '@/api'
 
 export default {
   name: 'shell',
@@ -95,7 +95,7 @@ export default {
       this.historyPos = this.history.length
       this.content.push(results)
 
-      api.command(
+      commands(
         this.path,
         cmd,
         event => {

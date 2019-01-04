@@ -12,7 +12,7 @@ export async function fetch (url) {
     data.url = `/files${data.path}`
 
     if (data.isDir) {
-      if (data.path !== '/') data.url += '/'
+      if (!data.url.endsWith('/')) data.url += '/'
       data.items = data.items.map((item, index) => {
         item.index = index
         item.url = `${data.url}${encodeURIComponent(item.name)}`

@@ -31,14 +31,14 @@
       </div>
 
       <div class="card-action">
-        <button class="cancel flat"
+        <button class="button button--flat button--grey"
           @click="closeHovers"
           v-focus
           :aria-label="$t('buttons.cancel')"
           :title="$t('buttons.cancel')">
           {{ $t('buttons.cancel') }}
         </button>
-        <button class="flat"
+        <button class="button button--flat"
           @click="deleteUser">
           {{ $t('buttons.delete') }}
         </button>

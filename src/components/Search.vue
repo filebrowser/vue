@@ -67,7 +67,9 @@
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex"
 import url from "@/utils/url"
-import { ws as api } from "@/api"
+import { search } from "@/api"
+
+// TODO: show fifty at the tie
 
 var boxes = {
   image: { label: "images", icon: "insert_photo" },
@@ -175,23 +177,8 @@ export default {
 
       this.ongoing = true
 
-      let results = []
-
-      api.search(
-        path,
-        this.value,
-        event => {
-          const res = JSON.parse(event.data)
-          if (res.path[0] === "/") {
-            res.path = res.path.substring(1)
-          }
-          results.push(res)
-        },
-        () => {
-          this.ongoing = false
-          this.results = results
-        }
-      )
+      this.results = await search(path, this.value)
+      this.ongoing = false
     }
   }
 }
