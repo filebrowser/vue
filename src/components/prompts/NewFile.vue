@@ -39,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['isListing'])
+    ...mapGetters([ 'isFiles', 'isListing' ])
   },
   methods: {
     submit: async function(event) {
@@ -47,7 +47,7 @@ export default {
       if (this.new === '') return
 
       // Build the path of the new directory.
-      let uri = this.$route.path + '/'
+      let uri = this.isFiles ? this.$route.path + '/' : '/'
 
       if (!this.isListing) {
         uri = url.removeLastDir(uri) + '/'
