@@ -1,6 +1,6 @@
 <template>
-  <div class="share">
-    <a href="?dl=1">
+  <div class="share" v-if="loaded">
+    <a target="_blank" :href="link">
       <div v-if="file.isDir">Download Folder</div>
       <div v-else>Download File</div>
       <div>
@@ -19,13 +19,39 @@
 </template>
 
 <script>
+import { share as api } from '@/api'
+import { baseURL } from '@/utils/constants'
+
 export default {
   name: 'share',
   data: () => ({
-    file: {
-      isDir: false,
-      name: 'My file.zip'
+    loaded: false,
+    notFound: false,
+    file: null
+  }),
+  watch: {
+    '$route': 'fetchData'
+  },
+  created: function () {
+    this.fetchData()
+  },
+  computed: {
+    hash: function () {
+      return this.$route.params.pathMatch
+    },
+    link: function () {
+      return `${baseURL}/api/public/dl/${this.hash}`
+    },
+  },
+  methods: {
+    fetchData: async function () {
+      try {
+        this.file = await api.getHash(this.hash)
+        this.loaded = true
+      } catch (e) {
+        this.notFound = true
+      }
     }
-  })
+  }
 }
 </script>

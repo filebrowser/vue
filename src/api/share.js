@@ -1,11 +1,15 @@
 import { fetchURL, fetchJSON, removePrefix } from './utils'
 
-export async function get (url) {
+export async function getHash(hash) {
+  return fetchJSON(`/api/public/share/${hash}`)
+}
+
+export async function get(url) {
   url = removePrefix(url)
   return fetchJSON(`/api/share${url}`)
 }
 
-export async function remove (hash) {
+export async function remove(hash) {
   const res = await fetchURL(`/api/share/${hash}`, {
     method: 'DELETE'
   })
@@ -15,7 +19,7 @@ export async function remove (hash) {
   }
 }
 
-export async function create (url, expires = '', unit = 'hours') {
+export async function create(url, expires = '', unit = 'hours') {
   url = removePrefix(url)
   url = `/api/share${url}`
   if (expires !== '') {

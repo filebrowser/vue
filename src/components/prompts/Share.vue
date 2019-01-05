@@ -12,7 +12,7 @@
 
         <li v-for="link in links" :key="link.hash">
           <a :href="buildLink(link.hash)" target="_blank">
-            <template v-if="link.expires">{{ humanTime(link.expireDate) }}</template>
+            <template v-if="link.expire !== 0">{{ humanTime(link.expire) }}</template>
             <template v-else>{{ $t('permanent') }}</template>
           </a>
 
@@ -98,7 +98,7 @@ export default {
       this.sort()
 
       for (let link of this.links) {
-        if (!link.expires) {
+        if (link.expire === 0) {
           this.hasPermanent = true
           break
         }
@@ -142,23 +142,23 @@ export default {
       event.preventDefault()
        try {
         await api.remove(link.hash)
-        if (!link.expires) this.hasPermanent = false
+        if (link.expire === 0) this.hasPermanent = false
         this.links = this.links.filter(item => item.hash !== link.hash)
       } catch (e) {
         this.$showError(e)
       }
     },
     humanTime (time) {
-      return moment(time).fromNow()
+      return moment(time * 1000).fromNow()
     },
     buildLink (hash) {
       return `${window.location.origin}${baseURL}/share/${hash}`
     },
     sort () {
       this.links = this.links.sort((a, b) => {
-        if (!a.expires) return -1
-        if (!b.expires) return 1
-        return new Date(a.expireDate) - new Date(b.expireDate)
+        if (a.expire === 0) return -1
+        if (b.expire === 0) return 1
+        return new Date(a.expire) - new Date(b.expire)
       })
     }
   }
