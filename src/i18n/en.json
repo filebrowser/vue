@@ -227,5 +227,9 @@
     "minutes": "Minutes",
     "hours": "Hours",
     "days": "Days"
+  },
+  "download": {
+    "downloadFile": "Download File",
+    "downloadFolder": "Download Folder"
   }
 }
