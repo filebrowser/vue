@@ -98,8 +98,6 @@ export async function post (url, content = '', overwrite = false, onupload) {
     window.onbeforeunload = () => { return "uploading!!!" };
 
     request.onload = () => {
-      // Upload is done no more message before closing the tab 
-      window.onbeforeunload = null;
       if (request.status === 200) {
         resolve(request.responseText)
       } else if (request.status === 409) {
@@ -114,7 +112,8 @@ export async function post (url, content = '', overwrite = false, onupload) {
     }
 
     request.send(content)
-  })
+    // Upload is done no more message before closing the tab 
+  }).finally(() => { window.onbeforeunload = null })
 }
 
 function moveCopy (items, copy = false) {
