@@ -95,7 +95,7 @@ export async function post (url, content = '', overwrite = false, onupload) {
     }
 
     // Send a message to user before closing the tab during file upload
-    window.onbeforeunload = () => { return "uploading!!!" };
+    window.onbeforeunload = () => "Files are being uploaded."
 
     request.onload = () => {
       if (request.status === 200) {
