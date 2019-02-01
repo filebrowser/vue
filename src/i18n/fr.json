@@ -32,7 +32,8 @@
     "toggleSidebar": "Afficher/Masquer la barre latérale",
     "update": "Mettre à jour",
     "upload": "Importer",
-    "permalink": "Obtenir un lien permanent"
+    "permalink": "Obtenir un lien permanent",
+    "bookmark": "Retenir dans les marques pages"
   },
   "success": {
     "linkCopied": "Link copied!"

@@ -112,6 +112,18 @@ export async function post (url, content = '', overwrite = false, onupload) {
   })
 }
 
+export function bookmark (items) {
+  let promises = []
+
+  for (let item of items) {
+    const path = removePrefix(item.path)
+    const url = `${path}?action=${item.bookmarked ? 'bookmark' : 'remove-bookmark'}`
+    promises.push(resourceAction(url, 'PATCH'))
+  }
+
+  return Promise.all(promises)
+}
+
 function moveCopy (items, copy = false) {
   let promises = []
 
