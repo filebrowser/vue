@@ -57,6 +57,7 @@ export function detectLocale () {
       break
     case /^ro.*/i.test(locale):
       locale = 'ro'
+      break
     case /^ru.*/i.test(locale):
       locale = 'ru'
       break
