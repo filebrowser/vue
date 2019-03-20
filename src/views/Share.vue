@@ -14,7 +14,7 @@
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
           <h1 class="share__box__title">{{ file.name }}</h1>
-          <qrcode-vue :value="link" size="200" level="H"></qrcode-vue>
+          <qrcode-vue :value="fullLink" size="200" level="M"></qrcode-vue>
         </div>
       </div>
     </a>
@@ -48,6 +48,9 @@ export default {
     },
     link: function () {
       return `${baseURL}/api/public/dl/${this.hash}`
+    },
+    fullLink: function () {
+      return window.location.origin + this.link
     },
   },
   methods: {
