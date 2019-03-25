@@ -18,7 +18,7 @@
         </button>
       </div>
 
-      <div>
+      <div v-if="!embededMode">
         <router-link class="action" to="/settings" :aria-label="$t('sidebar.settings')" :title="$t('sidebar.settings')">
           <i class="material-icons">settings_applications</i>
           <span>{{ $t('sidebar.settings') }}</span>
@@ -42,7 +42,7 @@
       </router-link>
     </template>
 
-    <p class="credits">
+    <p class="credits" v-if="!embededMode">
       <span>
         <span v-if="disableExternal">File Browser</span>
         <a v-else rel="noopener noreferrer" target="_blank" href="https://github.com/filebrowser/filebrowser">File Browser</a>
@@ -56,7 +56,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import * as auth from '@/utils/auth'
-import { version, signup, disableExternal, noAuth } from '@/utils/constants'
+import { version, signup, embededMode, disableExternal, noAuth } from '@/utils/constants'
 
 export default {
   name: 'sidebar',
@@ -69,6 +69,7 @@ export default {
     signup: () => signup,
     version: () => version,
     disableExternal: () => disableExternal,
+    embededMode: () => embededMode,
     noAuth: () => noAuth
   },
   methods: {

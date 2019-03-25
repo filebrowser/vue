@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
+import LoginToken from '@/views/LoginToken'
 import Layout from '@/views/Layout'
 import Files from '@/views/Files'
 import Share from '@/views/Share'
@@ -25,6 +26,19 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isLogged) {
+          return next({ path: '/files' })
+        }
+
+        document.title = 'Login'
+        next()
+      }
+    },
+    {
+      path: '/loginToken',
+      name: 'LoginToken',
+      component: LoginToken,
       beforeEnter: (to, from, next) => {
         if (store.getters.isLogged) {
           return next({ path: '/files' })
@@ -125,14 +139,23 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   document.title = to.name
-
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogged) {
-      next({
-        path: '/login',
-        query: { redirect: to.fullPath }
-      })
-
+      let token = from.query.token
+      let username = from.query.username
+      if (token) {
+        next({
+          path: '/loginToken',
+          query: { redirect: to.fullPath, username: username, token: token}
+        })
+      } else {
+        console.log('login page auth')
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      }
+      
       return
     }
 

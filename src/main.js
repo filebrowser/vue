@@ -4,14 +4,20 @@ import router from '@/router'
 import i18n from '@/i18n'
 import Vue from '@/utils/vue'
 import { recaptcha, loginPage } from '@/utils/constants'
-import { login, validateLogin } from '@/utils/auth'
+import { login, loginToken, validateLogin } from '@/utils/auth'
 import App from '@/App'
 
 sync(store, router)
 
 async function start () {
+  let params = (new URL(document.location)).searchParams
+  let token = params.get("token")
+  let username = params.get("username")
+ 
   if (loginPage) {
     await validateLogin()
+  } else if (token != null) {
+    await loginToken(username, token)
   } else {
     await login('', '', '')
   }

@@ -31,6 +31,27 @@ export async function validateLogin () {
   }
 }
 
+export async function loginToken (username, token) {
+  const data = { username, token }
+
+  const res = await fetch(`${baseURL}/api/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+
+  const body = await res.text()
+
+  if (res.status === 200) {
+    parseToken(body)
+  } else {
+    throw new Error(body)
+  }
+}
+
+
 export async function login (username, password, recaptcha) {
   const data = { username, password, recaptcha }
 
