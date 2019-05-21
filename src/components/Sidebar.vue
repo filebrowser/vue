@@ -6,7 +6,14 @@
         <span>{{ $t('sidebar.myFiles') }}</span>
       </router-link>
 
-      <div v-if="user.perm.create">
+      <div>
+        <router-link v-for="(bookmark) in bookmarks" :to="'/files'+bookmark.path" class="action" :aria-label="bookmark.name" :title="bookmark.name">
+          <i class="material-icons">folder</i>
+          <span>{{ bookmark.name }}</span>
+        </router-link>
+      </div>
+
+      <div v-if="user.perm.create" v-show="showNew">
         <button @click="$store.commit('showHover', 'newDir')" class="action" :aria-label="$t('sidebar.newFolder')" :title="$t('sidebar.newFolder')">
           <i class="material-icons">create_new_folder</i>
           <span>{{ $t('sidebar.newFolder') }}</span>
@@ -62,9 +69,17 @@ export default {
   name: 'sidebar',
   computed: {
     ...mapState([ 'user' ]),
-    ...mapGetters([ 'isLogged' ]),
+    ...mapGetters([
+      'isLogged',
+      'bookmarks',
+      'isFiles',
+      'isListing'
+    ]),
     active () {
       return this.$store.state.show === 'sidebar'
+    },
+    showNew() {
+      return this.isFiles && this.isListing
     },
     signup: () => signup,
     version: () => version,
